@@ -60,7 +60,7 @@ body{
 }
 
     .shortcuts{
-    margin-top:40px;
+    margin-top:100px;
     display:grid;
     grid-template-columns:repeat(4,120px);
     gap:20px;
@@ -84,6 +84,12 @@ body{
 .card:hover{
     transform:translateY(-5px);
 }
+
+    .logo{
+    width:180px;
+    margin-bottom:40px;
+    filter:drop-shadow(0 0 25px rgba(37,99,235,.6));
+}
     
 </style>
 
@@ -91,15 +97,27 @@ body{
 <body>
 
 <div class="container">
-
+<img src="c7896133-3991-4070-a5bb-7db2cc9d612a.png" class="logo">
+    
     <div class="logo">Utrux Browser</div>
 
 <div class="shortcuts">
 
-  <div class="card">YouTube</div>
-  <div class="card">GitHub</div>
-  <div class="card">ChatGPT</div>
-  <div class="card">Wikipedia</div>
+<a class="card" href="https://youtube.com">
+    YouTube
+</a>
+
+<a class="card" href="https://github.com">
+    GitHub
+</a>
+
+<a class="card" href="https://chatgpt.com">
+    ChatGPT
+</a>
+
+<a class="card" href="https://wikipedia.org">
+    Wikipedia
+</a>
 
 </div>
     
@@ -107,7 +125,7 @@ body{
         <input
             type="text"
             id="query"
-            placeholder="هر چیزی را جستجو کنید..."
+            placeholder="هر چیزی را که میخواهید جستجو کنید..."
             onkeypress="if(event.key==='Enter') search()"
         >
         <button onclick="search()">جستجو</button>
