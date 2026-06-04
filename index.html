@@ -450,22 +450,6 @@ h1{
 
 }
 
-const pexelsData = await pexelsResponse.json();
-
-    if(!query) return;
-
-    const resultsDiv = document.getElementById("results");
-
-    resultsDiv.innerHTML = "<h3>در حال جستجو...</h3>";
-
-    try{
-
-      
-
-        const data = await response.json();
-
-        const imagesDiv = document.getElementById("images");
-
 imagesDiv.innerHTML = "";
 
 if(data.images && data.images.length){
@@ -584,6 +568,9 @@ function openAccount(){
 
     alert("بخش حساب بعدا تکمیل میشه");
 
+}
+    function openAccount() {
+    console.log("Account clicked");
 }
 </script>
 
