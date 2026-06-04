@@ -7,64 +7,84 @@
 <link rel="icon" type="image/png" href="c7896133-3991-4070-a5bb-7db2cc9d612a.png">
 <style>
 body{
-    font-family:Tahoma,sans-serif;
-    background:#f5f5f5;
     margin:0;
-    padding:40px;
+    min-height:100vh;
+    font-family:Inter,Tahoma,sans-serif;
+    background:
+    radial-gradient(circle at top,#1e3a8a 0%,#0f172a 40%,#020617 100%);
+    color:white;
 }
 
 .container{
-    max-width:900px;
-    margin:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
 }
 
 .logo{
-    text-align:center;
-    font-size:48px;
-    font-weight:bold;
-    margin-bottom:30px;
+    width:140px;
+    margin-bottom:25px;
 }
 
 .search-box{
+    width:min(800px,90%);
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
     display:flex;
-    gap:10px;
-    margin-bottom:30px;
+    padding:8px;
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.4);
 }
 
 .search-box input{
     flex:1;
+    background:none;
+    border:none;
+    color:white;
     padding:15px;
-    border:1px solid #ccc;
-    border-radius:30px;
     font-size:18px;
+    outline:none;
 }
 
 .search-box button{
-    padding:15px 25px;
     border:none;
-    border-radius:30px;
+    background:#2563eb;
+    color:white;
+    border-radius:18px;
+    padding:0 25px;
     cursor:pointer;
-    font-size:16px;
 }
 
-.result{
-    background:white;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+    .shortcuts{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(4,120px);
+    gap:20px;
 }
 
-.result a{
-    font-size:20px;
-    color:#1a0dab;
-    text-decoration:none;
+.card{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    height:120px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    backdrop-filter:blur(20px);
+
+    transition:.25s;
 }
 
-.result p{
-    color:#444;
-    margin-top:8px;
+.card:hover{
+    transform:translateY(-5px);
 }
+    
 </style>
 
 </head>
@@ -72,8 +92,17 @@ body{
 
 <div class="container">
 
-    <div class="logo">جستجوگر من</div>
+    <div class="logo">Utrux Browser</div>
 
+<div class="shortcuts">
+
+  <div class="card">YouTube</div>
+  <div class="card">GitHub</div>
+  <div class="card">ChatGPT</div>
+  <div class="card">Wikipedia</div>
+
+</div>
+    
     <div class="search-box">
         <input
             type="text"
