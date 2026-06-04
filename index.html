@@ -391,7 +391,7 @@ h1{
     placeholder="هر چیزی را که میخواهید جستجو کنید...">
 
 <button onclick="search()">
-    جستجو
+جستجو
 </button>
 </div>
 
@@ -620,7 +620,7 @@ window.addEventListener(
     "DOMContentLoaded",
     loadUser
 );
-    function search(){
+function search(){
 
     const query =
     document.getElementById("query").value.trim();
@@ -628,19 +628,19 @@ window.addEventListener(
     if(!query) return;
 
     window.location.href =
-    "https://utruc.github.io/utrux-search/?q="
+    "https://utruc.github.io/utrux-search//?q="
     + encodeURIComponent(query);
 
 }
-    <script>
+    document
+.getElementById("query")
+.addEventListener("keydown",function(e){
 
-function search(){
+    if(e.key==="Enter"){
+        search();
+    }
 
-    alert("دکمه جستجو کار کرد");
-
-}
-
-</script>
+});
 </script>
 
 </body>
