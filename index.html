@@ -424,16 +424,23 @@ h1{
 
 function search(){
 
-    alert("search works");
+    const q =
+    document.getElementById("query").value.trim();
+
+    if(!q) return;
+
+    window.location.href =
+    "https://USERNAME.github.io/utrux-search/?q="
+    + encodeURIComponent(q);
 
 }
 
 function openAccount(){
 
-    alert("account works");
+    document.getElementById("accountModal")
+    .style.display = "flex";
 
 }
-
 </script>
 
 </body>
