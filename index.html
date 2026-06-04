@@ -297,20 +297,22 @@ h1{
 
     <h1>Utrux Browser</h1>
 
-    <div class="search-box">
+<div class="search-box">
 
-        <input
-        id="query"
-        type="text"
-        placeholder="هر چیزی را که میخواهید جستجو کنید...">
+    <input
+    id="query"
+    type="text"
+    placeholder="هر چیزی را که میخواهید جستجو کنید...">
 
-        <button onclick="search()">
-            جستجو
-        </button>
+    <button onclick="search()">
+        جستجو
+    </button>
 
-    </div>
+</div>
 
-    <div class="shortcuts">
+<div id="suggestions"></div>
+
+<div class="shortcuts" id="shortcuts">
 
         <a class="card" href="https://youtube.com">
             <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64">
@@ -457,8 +459,6 @@ ${result.content}
 
     const shortcuts =
     JSON.parse(localStorage.getItem("shortcuts") || "[]");
-const favicon =
-`https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
     shortcuts.push({
         name,
         url
@@ -486,41 +486,6 @@ const favicon =
 
     const container =
     document.querySelector(".shortcuts");
-
-    container.innerHTML = "";
-
-    shortcuts.forEach(site=>{
-
-       let domain;
-
-try{
-    domain = new URL(site.url).hostname;
-}catch{
-    domain = site.url
-        .replace("https://","")
-        .replace("http://","")
-        .split("/")[0];
-}
-
-        let favicon =
-        `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-
-        container.innerHTML += `
-        <a class="card"
-           href="${site.url}"
-           target="_blank">
-
-            <img
-             src="${favicon}"
-             onerror="this.outerHTML=
-             '<div class=letter-icon>${site.name[0].toUpperCase()}</div>'">
-
-            <span>${site.name}</span>
-
-        </a>
-        `;
-    });
-}
 
     query.addEventListener(
 "input",
