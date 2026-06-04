@@ -231,6 +231,27 @@ h1{
 
     background:#1f2937;
 }
+    .add-card{
+
+    cursor:pointer;
+}
+
+.plus{
+
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.1);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+}
 #images{
 
     margin-top:60px;
@@ -299,16 +320,16 @@ h1{
             <img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=64">
             <span>Wiki</span>
         </a>
-<button onclick="addShortcut()" class="add-btn">
-+ افزودن سایت
-</button>
+<div class="shortcuts" id="shortcuts">
+
+    <div class="card add-card"
+         onclick="addShortcut()">
+
+        <div class="plus">+</div>
+
+        <span>افزودن</span>
+
     </div>
-
-    <div id="images"></div>
-
-    <div id="results"></div>
-
-    <div id="suggestions"></div>
 
 </div>
 <script>
@@ -469,8 +490,16 @@ const favicon =
 
     shortcuts.forEach(site=>{
 
-        let domain =
-        new URL(site.url).hostname;
+       let domain;
+
+try{
+    domain = new URL(site.url).hostname;
+}catch{
+    domain = site.url
+        .replace("https://","")
+        .replace("http://","")
+        .split("/")[0];
+}
 
         let favicon =
         `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
@@ -537,6 +566,11 @@ async function(){
 
     search();
 }
+    window.onload = () => {
+
+    renderShortcuts();
+
+};
 </script>
 
 </body>
