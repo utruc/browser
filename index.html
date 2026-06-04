@@ -432,21 +432,80 @@ const PEXELS_API_KEY = "LBX1wKWqpXvrZQLXA6xbDaZ376NBhcDZmPAAgBeKyFNF5FtYlpYRBeXw
 async function search(){
 
     const query = document.getElementById("query").value.trim();
-
     const pexelsResponse = await fetch(
     `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=12`,
     {
         headers: {
             Authorization: PEXELS_API_KEY
         }
-document.getElementById("query")
-.addEventListener("keydown", e => {
+    }
+);
 
-    if(e.key === "Enter"){
-        search();
+const pexelsData = await pexelsResponse.json();
+
+    if(!query) return;
+
+    const resultsDiv = document.getElementById("results");
+
+    resultsDiv.innerHTML = "<h3>در حال جستجو...</h3>";
+
+    try{
+
+        const response = await fetch(
+            "https://api.tavily.com/search",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    api_key:API_KEY,
+                    query:query,
+                    max_results:10,
+                    search_depth:"basic"
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        resultsDiv.innerHTML = "";
+
+        if(!data.results || data.results.length===0){
+
+            resultsDiv.innerHTML =
+            "<h3>نتیجه‌ای پیدا نشد.</h3>";
+
+            return;
+        }
+
+        data.results.forEach(result=>{
+
+            resultsDiv.innerHTML += `
+                <div class="result">
+                    <a href="${result.url}" target="_blank">
+                        ${result.title}
+                    </a>
+
+                    <p>
+                        ${result.content || ""}
+                    </p>
+
+                    <small>${result.url}</small>
+                </div>
+            `;
+
+        });
+
+    }catch(error){
+
+        console.error(error);
+
+        resultsDiv.innerHTML =
+        "<h3>خطا در اتصال به API</h3>";
     }
 
-});
+}
 
 const pexelsData = await pexelsResponse.json();
 
