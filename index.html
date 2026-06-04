@@ -474,35 +474,7 @@ if(data.images && data.images.length){
 
 }
 
-        data.results.forEach(result=>{
-
-            resultsDiv.innerHTML += `
-                <div class="result">
-                    <a href="${result.url}" target="_blank">
-                        ${result.title}
-                    </a>
-
-                    <p>
-                        ${result.content || ""}
-                    </p>
-
-                    <small>${result.url}</small>
-                </div>
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        resultsDiv.innerHTML =
-        "<h3>خطا در اتصال به API</h3>";
-    }
-
-}
-
- 
+     
         function openAccount(){
 
     document.getElementById(
@@ -564,14 +536,6 @@ function search(){
 
 }
 
-function openAccount(){
-
-    alert("بخش حساب بعدا تکمیل میشه");
-
-}
-    function openAccount() {
-    console.log("Account clicked");
-}
 </script>
 
 </body>
