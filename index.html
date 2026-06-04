@@ -419,120 +419,18 @@ h1{
         </a>
 
 </div>
-<script>
 
+    <script>
 
-        data.results.forEach(result=>{
-
-            resultsDiv.innerHTML += `
-                <div class="result">
-                    <a href="${result.url}" target="_blank">
-                        ${result.title}
-                    </a>
-
-                    <p>
-                        ${result.content || ""}
-                    </p>
-
-                    <small>${result.url}</small>
-                </div>
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        resultsDiv.innerHTML =
-        "<h3>خطا در اتصال به API</h3>";
-    }
-
-}
-
-imagesDiv.innerHTML = "";
-
-if(data.images && data.images.length){
-
-    imagesDiv.innerHTML = "<h2>تصاویر</h2>";
-
-    data.images.forEach(img => {
-
-        imagesDiv.innerHTML += `
-            <img
-                src="${img}"
-                style="
-                width:200px;
-                height:150px;
-                object-fit:cover;
-                margin:5px;
-                border-radius:10px;
-                ">
-        `;
-
-    });
-
-}
-
-     
-        function openAccount(){
-
-    document.getElementById(
-        "accountModal"
-    ).style.display = "flex";
-}
-
-function saveAccount(){
-
-    const name =
-    document.getElementById("username").value;
-
-    const email =
-    document.getElementById("email").value;
-
-    localStorage.setItem(
-        "utruxUser",
-        JSON.stringify({
-            name,
-            email
-        })
-    );
-
-    loadUser();
-
-    document.getElementById(
-        "accountModal"
-    ).style.display = "none";
-}
-
-function loadUser(){
-
-    const user =
-    JSON.parse(
-        localStorage.getItem("utruxUser")
-    );
-
-    if(!user) return;
-
-    document.getElementById("account")
-    .innerHTML =
-    `👤 ${user.name}`;
-}
-
-window.addEventListener(
-    "DOMContentLoaded",
-    loadUser
-);
 function search(){
 
-    const q =
-    document.getElementById("query").value.trim();
+    alert("search works");
 
-    if(!q) return;
+}
 
-    window.location.href =
-    "https://USERNAME.github.io/utrux-search/?q="
-    + encodeURIComponent(q);
+function openAccount(){
+
+    alert("account works");
 
 }
 
