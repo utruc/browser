@@ -6,104 +6,214 @@
 <title>Utrux Browser</title>
 <link rel="icon" type="image/png" href="c7896133-3991-4070-a5bb-7db2cc9d612a.png">
 <style>
-body{
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
+
+*{
     margin:0;
-    min-height:100vh;
-    font-family:Inter,Tahoma,sans-serif;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Vazirmatn',sans-serif;
+
     background:
-    radial-gradient(circle at top,#1e3a8a 0%,#0f172a 40%,#020617 100%);
+    radial-gradient(circle at center,
+    #1e3a8a 0%,
+    #081229 35%,
+    #020617 100%);
+
     color:white;
+
+    min-height:100vh;
 }
 
 .container{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding-top:80px;
+
+    text-align:center;
 }
 
 .logo{
-    width:140px;
-    margin-bottom:25px;
+
+    width:120px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 60px rgba(37,99,235,.5);
+
+    margin-bottom:20px;
+}
+
+h1{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-bottom:35px;
 }
 
 .search-box{
-    width:min(800px,90%);
-    backdrop-filter:blur(20px);
+
+    width:min(850px,90%);
+
+    margin:auto;
+
     background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
     display:flex;
-    padding:8px;
-    box-shadow:
-    0 10px 40px rgba(0,0,0,.4);
+
+    overflow:hidden;
+
+    backdrop-filter:blur(20px);
 }
 
 .search-box input{
+
     flex:1;
+
     background:none;
+
     border:none;
-    color:white;
-    padding:15px;
-    font-size:18px;
+
     outline:none;
+
+    color:white;
+
+    font-size:18px;
+
+    padding:18px;
+}
+
+.search-box input::placeholder{
+
+    color:#a8b3cf;
 }
 
 .search-box button{
+
+    width:120px;
+
     border:none;
+
     background:#2563eb;
+
     color:white;
-    border-radius:18px;
-    padding:0 25px;
+
     cursor:pointer;
+
+    font-size:16px;
+}
+
+.search-box button:hover{
+
+    background:#3b82f6;
 }
 
 .shortcuts{
-    margin-top:70px;
-    display:grid;
-    grid-template-columns:repeat(4,80px);
+
+    margin-top:40px;
+
+    display:flex;
+
     justify-content:center;
-    gap:20px;
+
+    gap:25px;
+
+    flex-wrap:wrap;
 }
 
 .card{
-    width:64px;
-    height:64px;
+
+    width:72px;
 
     text-decoration:none;
-    color:white;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    color:white;
+}
+
+.card img{
+
+    width:54px;
+
+    height:54px;
 
     border-radius:50%;
 
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.08);
+
+    padding:10px;
 
     transition:.25s;
 }
 
-.card:hover{
-    transform:translateY(-4px);
-}
+.card:hover img{
 
-.card img{
-    width:32px;
-    height:32px;
+    transform:translateY(-5px);
 }
 
 .card span{
+
+    display:block;
+
+    margin-top:8px;
+
     font-size:12px;
-    margin-top:6px;
 }
-    .logo{
-    width:180px;
-    margin-bottom:40px;
-    filter:drop-shadow(0 0 25px rgba(37,99,235,.6));
+
+.result{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+}
+
+.result a{
+
+    color:#60a5fa;
+
+    font-size:20px;
+
+    text-decoration:none;
+}
+
+.result p{
+
+    color:#cbd5e1;
+
+    margin-top:10px;
+}
+    
+#images{
+
+    margin-top:60px;
+}
+
+#results{
+
+    margin-top:30px;
+
+    text-align:right;
 }
     
 </style>
@@ -112,46 +222,53 @@ body{
 <body>
 
 <div class="container">
-<img src="c7896133-3991-4070-a5bb-7db2cc9d612a.png" class="logo">
-    
-    <div class="logo">Utrux Browser</div>
 
-<div class="shortcuts">
+    <img src="logo.png" class="logo">
 
-<a class="card" href="https://youtube.com">
-    YouTube
-</a>
+    <h1>Utrux Browser</h1>
 
-<a class="card" href="https://github.com">
-    GitHub
-</a>
-
-<a class="card" href="https://chatgpt.com">
-    ChatGPT
-</a>
-
-<a class="card" href="https://wikipedia.org">
-    Wikipedia
-</a>
-
-</div>
-    
     <div class="search-box">
+
         <input
-            type="text"
-            id="query"
-            placeholder="هر چیزی را که میخواهید جستجو کنید..."
-            onkeypress="if(event.key==='Enter') search()"
-        >
-        <button onclick="search()">جستجو</button>
+        id="query"
+        type="text"
+        placeholder="هر چیزی را جستجو کنید...">
+
+        <button onclick="search()">
+            جستجو
+        </button>
+
+    </div>
+
+    <div class="shortcuts">
+
+        <a class="card" href="https://youtube.com">
+            <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64">
+            <span>YouTube</span>
+        </a>
+
+        <a class="card" href="https://github.com">
+            <img src="https://www.google.com/s2/favicons?domain=github.com&sz=64">
+            <span>GitHub</span>
+        </a>
+
+        <a class="card" href="https://chatgpt.com">
+            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64">
+            <span>ChatGPT</span>
+        </a>
+
+        <a class="card" href="https://wikipedia.org">
+            <img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=64">
+            <span>Wiki</span>
+        </a>
+
     </div>
 
     <div id="images"></div>
-<div id="results"></div>
+
     <div id="results"></div>
 
 </div>
-
 <script>
 
 const API_KEY = "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";
@@ -224,16 +341,19 @@ if(data.images && data.images.length){
 
 }
 
-        resultsDiv.innerHTML = "";
+resultsDiv.innerHTML += `
+<div class="result">
 
-        if(!data.results || data.results.length===0){
+<a href="${result.url}" target="_blank">
+${result.title}
+</a>
 
-            resultsDiv.innerHTML =
-            "<h3>نتیجه‌ای پیدا نشد.</h3>";
+<p>
+${result.content}
+</p>
 
-            return;
-        }
-
+</div>
+`;
         data.results.forEach(result=>{
 
             resultsDiv.innerHTML += `
