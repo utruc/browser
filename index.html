@@ -622,14 +622,12 @@ window.addEventListener(
 );
 function search(){
 
-    const query =
-    document.getElementById("query").value.trim();
-
-    if(!query) return;
+    const q =
+    document.getElementById("query").value;
 
     window.location.href =
-    "https://utruc.github.io/utrux-search//?q="
-    + encodeURIComponent(query);
+    "https://google.com/search?q="
+    + encodeURIComponent(q);
 
 }
     document
