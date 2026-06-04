@@ -396,11 +396,6 @@ h1{
 
 </div>
 
-<div id="suggestions"></div>
-    
-<div id="images"></div>
-
-<div id="results"></div>
 
 <div class="shortcuts" id="shortcuts">
 
@@ -427,19 +422,6 @@ h1{
 </div>
 <script>
 
-const API_KEY = "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";
-const PEXELS_API_KEY = "LBX1wKWqpXvrZQLXA6xbDaZ376NBhcDZmPAAgBeKyFNF5FtYlpYRBeXw";
-async function search(){
-
-    const query = document.getElementById("query").value.trim();
-    const pexelsResponse = await fetch(
-    `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=12`,
-    {
-        headers: {
-            Authorization: PEXELS_API_KEY
-        }
-    }
-);
 
 const pexelsData = await pexelsResponse.json();
 
@@ -590,45 +572,7 @@ if(data.images && data.images.length){
 
 }
 
-    function showSuggestions(list){
-
-    const box =
-    document.getElementById("suggestions");
-
-    box.innerHTML = "";
-
-    list.forEach(item=>{
-
-        box.innerHTML += `
-        <div
-        class="suggestion"
-        onclick="selectSuggestion('${item}')">
-
-        ${item}
-
-        </div>
-        `;
-    });
-}
-    function selectSuggestion(text){
-
-    document.getElementById("query").value =
-    text;
-
-    search();
-}
-    window.onload = () => {
-
-    renderShortcuts();
-
-};
-    setInterval(()=>{
-
-    console.log(
-        document.getElementById("shortcuts")
-    );
-
-},1000);
+ 
         function openAccount(){
 
     document.getElementById(
@@ -677,6 +621,18 @@ window.addEventListener(
     "DOMContentLoaded",
     loadUser
 );
+    function search(){
+
+    const query =
+    document.getElementById("query").value.trim();
+
+    if(!query) return;
+
+    window.location.href =
+    "https://utruc.github.io/utrux-search/?q="
+    + encodeURIComponent(query);
+
+}
 </script>
 
 </body>
