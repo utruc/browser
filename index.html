@@ -493,19 +493,6 @@ if(data.images && data.images.length){
 
 }
 
-resultsDiv.innerHTML += `
-<div class="result">
-
-<a href="${result.url}" target="_blank">
-${result.title}
-</a>
-
-<p>
-${result.content}
-</p>
-
-</div>
-`;
         data.results.forEach(result=>{
 
             resultsDiv.innerHTML += `
@@ -565,7 +552,7 @@ ${result.content}
         </div>
     `;
 }
-    function renderShortcuts(){
+function renderShortcuts(){
 
     const shortcuts =
     JSON.parse(localStorage.getItem("shortcuts") || "[]");
@@ -573,8 +560,34 @@ ${result.content}
     const container =
     document.querySelector(".shortcuts");
 
-    query.addEventListener(
-"input",
+    container.innerHTML = "";
+
+    shortcuts.forEach(site=>{
+
+        container.innerHTML += `
+        <a class="card"
+           href="${site.url}"
+           target="_blank">
+
+           <span>${site.name}</span>
+
+        </a>
+        `;
+
+    });
+
+} // اینجا renderShortcuts تموم میشه
+
+
+const query = document.getElementById("query");
+
+query.addEventListener("input", async function(){
+
+    const text = this.value;
+
+    if(text.length < 2) return;
+
+});
 async function(){
 
     const text = this.value;
