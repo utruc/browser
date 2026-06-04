@@ -84,6 +84,8 @@ body{
         <button onclick="search()">جستجو</button>
     </div>
 
+    <div id="images"></div>
+<div id="results"></div>
     <div id="results"></div>
 
 </div>
@@ -91,10 +93,21 @@ body{
 <script>
 
 const API_KEY = "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";
-
+const PEXELS_API_KEY = "LBX1wKWqpXvrZQLXA6xbDaZ376NBhcDZmPAAgBeKyFNF5FtYlpYRBeXw";
 async function search(){
 
     const query = document.getElementById("query").value.trim();
+
+    const pexelsResponse = await fetch(
+    `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=12`,
+    {
+        headers: {
+            Authorization: PEXELS_API_KEY
+        }
+    }
+);
+
+const pexelsData = await pexelsResponse.json();
 
     if(!query) return;
 
@@ -111,16 +124,43 @@ async function search(){
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:JSON.stringify({
-                    api_key:API_KEY,
-                    query:query,
-                    max_results:10,
-                    search_depth:"basic"
-                })
+body:JSON.stringify({
+    api_key:API_KEY,
+    query:query,
+    max_results:10,
+    search_depth:"basic",
+    include_images:true
+        })
             }
         );
 
         const data = await response.json();
+
+        const imagesDiv = document.getElementById("images");
+
+imagesDiv.innerHTML = "";
+
+if(data.images && data.images.length){
+
+    imagesDiv.innerHTML = "<h2>تصاویر</h2>";
+
+    data.images.forEach(img => {
+
+        imagesDiv.innerHTML += `
+            <img
+                src="${img}"
+                style="
+                width:200px;
+                height:150px;
+                object-fit:cover;
+                margin:5px;
+                border-radius:10px;
+                ">
+        `;
+
+    });
+
+}
 
         resultsDiv.innerHTML = "";
 
