@@ -468,6 +468,37 @@ function openAccount(){
     .style.display = "flex";
 
 }
+        function saveAccount(){
+
+    const name =
+    document.getElementById("username").value;
+
+    const email =
+    document.getElementById("email").value;
+
+    if(!name || !email){
+
+        alert("نام و ایمیل را وارد کنید");
+
+        return;
+    }
+
+    localStorage.setItem(
+        "utruxUser",
+        JSON.stringify({
+            name:name,
+            email:email
+        })
+    );
+
+    document.getElementById("account")
+    .innerHTML =
+    "👤 " + name;
+
+    document.getElementById("accountModal")
+    .style.display = "none";
+
+}
 </script>
 
 </body>
