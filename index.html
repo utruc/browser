@@ -422,44 +422,6 @@ h1{
 <script>
 
 
-const pexelsData = await pexelsResponse.json();
-
-    if(!query) return;
-
-    const resultsDiv = document.getElementById("results");
-
-    resultsDiv.innerHTML = "<h3>در حال جستجو...</h3>";
-
-    try{
-
-        const response = await fetch(
-            "https://api.tavily.com/search",
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-                    api_key:API_KEY,
-                    query:query,
-                    max_results:10,
-                    search_depth:"basic"
-                })
-            }
-        );
-
-        const data = await response.json();
-
-        resultsDiv.innerHTML = "";
-
-        if(!data.results || data.results.length===0){
-
-            resultsDiv.innerHTML =
-            "<h3>نتیجه‌ای پیدا نشد.</h3>";
-
-            return;
-        }
-
         data.results.forEach(result=>{
 
             resultsDiv.innerHTML += `
@@ -498,22 +460,7 @@ const pexelsData = await pexelsResponse.json();
 
     try{
 
-        const response = await fetch(
-            "https://api.tavily.com/search",
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-body:JSON.stringify({
-    api_key:API_KEY,
-    query:query,
-    max_results:10,
-    search_depth:"basic",
-    include_images:true
-        })
-            }
-        );
+      
 
         const data = await response.json();
 
@@ -623,22 +570,21 @@ window.addEventListener(
 function search(){
 
     const q =
-    document.getElementById("query").value;
+    document.getElementById("query").value.trim();
+
+    if(!q) return;
 
     window.location.href =
-    "https://google.com/search?q="
+    "https://USERNAME.github.io/utrux-search/?q="
     + encodeURIComponent(q);
 
 }
-    document
-.getElementById("query")
-.addEventListener("keydown",function(e){
 
-    if(e.key==="Enter"){
-        search();
-    }
+function openAccount(){
 
-});
+    alert("بخش حساب بعدا تکمیل میشه");
+
+}
 </script>
 
 </body>
