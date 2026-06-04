@@ -295,11 +295,88 @@ h1{
 
     overflow:hidden;
 }
+    #account{
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    background:rgba(255,255,255,.08);
+
+    padding:10px 15px;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(20px);
+}
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+
+    background:#111827;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    width:300px;
+}
+
+.modal-content input{
+
+    width:100%;
+
+    margin:10px 0;
+
+    padding:12px;
+}
 </style>
 
 </head>
 <body>
 
+<div id="account" onclick="openAccount()">
+    👤 کاربر مهمان
+</div>
+
+<div id="accountModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>ساخت حساب</h2>
+
+        <input
+        id="username"
+        placeholder="نام">
+
+        <input
+        id="email"
+        placeholder="ایمیل">
+
+        <button onclick="saveAccount()">
+            ذخیره
+        </button>
+
+    </div>
+
+</div>
+    
 <div class="container">
 
     <img src="c7896133-3991-4070-a5bb-7db2cc9d612a.png" class="logo">
@@ -553,6 +630,54 @@ async function(){
     );
 
 },1000);
+        function openAccount(){
+
+    document.getElementById(
+        "accountModal"
+    ).style.display = "flex";
+}
+
+function saveAccount(){
+
+    const name =
+    document.getElementById("username").value;
+
+    const email =
+    document.getElementById("email").value;
+
+    localStorage.setItem(
+        "utruxUser",
+        JSON.stringify({
+            name,
+            email
+        })
+    );
+
+    loadUser();
+
+    document.getElementById(
+        "accountModal"
+    ).style.display = "none";
+}
+
+function loadUser(){
+
+    const user =
+    JSON.parse(
+        localStorage.getItem("utruxUser")
+    );
+
+    if(!user) return;
+
+    document.getElementById("account")
+    .innerHTML =
+    `👤 ${user.name}`;
+}
+
+window.addEventListener(
+    "DOMContentLoaded",
+    loadUser
+);
 </script>
 
 </body>
