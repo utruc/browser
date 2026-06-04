@@ -203,7 +203,34 @@ h1{
 
     margin-top:10px;
 }
-    
+    .letter-icon{
+
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+    font-weight:bold;
+}
+    .suggestion{
+
+    padding:12px 18px;
+
+    cursor:pointer;
+}
+
+.suggestion:hover{
+
+    background:#1f2937;
+}
 #images{
 
     margin-top:60px;
@@ -215,7 +242,18 @@ h1{
 
     text-align:right;
 }
-    
+    #suggestions{
+
+    width:min(850px,90%);
+
+    margin:auto;
+
+    background:#111827;
+
+    border-radius:15px;
+
+    overflow:hidden;
+}
 </style>
 
 </head>
@@ -232,7 +270,7 @@ h1{
         <input
         id="query"
         type="text"
-        placeholder="هر چیزی را جستجو کنید...">
+        placeholder="هر چیزی را که میخواهید جستجو کنید...">
 
         <button onclick="search()">
             جستجو
@@ -261,12 +299,16 @@ h1{
             <img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=64">
             <span>Wiki</span>
         </a>
-
+<button onclick="addShortcut()" class="add-btn">
++ افزودن سایت
+</button>
     </div>
 
     <div id="images"></div>
 
     <div id="results"></div>
+
+    <div id="suggestions"></div>
 
 </div>
 <script>
@@ -380,6 +422,121 @@ ${result.content}
         "<h3>خطا در اتصال به API</h3>";
     }
 
+}
+    function addShortcut(){
+
+    const name = prompt("اسم سایت:");
+
+    if(!name) return;
+
+    const url = prompt("لینک سایت:");
+
+    if(!url) return;
+
+    const shortcuts =
+    JSON.parse(localStorage.getItem("shortcuts") || "[]");
+const favicon =
+`https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    shortcuts.push({
+        name,
+        url
+    });
+
+    localStorage.setItem(
+        "shortcuts",
+        JSON.stringify(shortcuts)
+    );
+
+    renderShortcuts();
+}
+    function createIcon(name){
+
+    return `
+        <div class="letter-icon">
+            ${name[0].toUpperCase()}
+        </div>
+    `;
+}
+    function renderShortcuts(){
+
+    const shortcuts =
+    JSON.parse(localStorage.getItem("shortcuts") || "[]");
+
+    const container =
+    document.querySelector(".shortcuts");
+
+    container.innerHTML = "";
+
+    shortcuts.forEach(site=>{
+
+        let domain =
+        new URL(site.url).hostname;
+
+        let favicon =
+        `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
+        container.innerHTML += `
+        <a class="card"
+           href="${site.url}"
+           target="_blank">
+
+            <img
+             src="${favicon}"
+             onerror="this.outerHTML=
+             '<div class=letter-icon>${site.name[0].toUpperCase()}</div>'">
+
+            <span>${site.name}</span>
+
+        </a>
+        `;
+    });
+}
+    renderShortcuts();
+
+    query.addEventListener(
+"input",
+async function(){
+
+    const text = this.value;
+
+    if(text.length < 2) return;
+
+    const res =
+    await fetch(
+    `https://suggestqueries.google.com/complete/search?client=firefox&q=${encodeURIComponent(text)}`
+    );
+
+    const data =
+    await res.json();
+
+    showSuggestions(data[1]);
+});
+    function showSuggestions(list){
+
+    const box =
+    document.getElementById("suggestions");
+
+    box.innerHTML = "";
+
+    list.forEach(item=>{
+
+        box.innerHTML += `
+        <div
+        class="suggestion"
+        onclick="selectSuggestion('${item}')">
+
+        ${item}
+
+        </div>
+        `;
+    });
+}
+    function selectSuggestion(text){
+
+    document.getElementById("query").value =
+    text;
+
+    search();
 }
 </script>
 
