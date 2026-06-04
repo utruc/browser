@@ -397,6 +397,10 @@ h1{
 </div>
 
 <div id="suggestions"></div>
+    
+<div id="images"></div>
+
+<div id="results"></div>
 
 <div class="shortcuts" id="shortcuts">
 
@@ -435,8 +439,14 @@ async function search(){
         headers: {
             Authorization: PEXELS_API_KEY
         }
+document.getElementById("query")
+.addEventListener("keydown", e => {
+
+    if(e.key === "Enter"){
+        search();
     }
-);
+
+});
 
 const pexelsData = await pexelsResponse.json();
 
