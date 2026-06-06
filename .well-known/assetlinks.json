@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.utruc.twa",
+        "sha256_cert_fingerprints": ["DB:C0:C7:84:23:43:98:1A:33:FA:EB:25:98:50:48:73:CA:ED:9D:9A:93:DE:EE:89:AE:24:AC:77:A6:81:9C:C0"]
+      }
+    }]
