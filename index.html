@@ -384,6 +384,12 @@ h1{
 
     padding:12px;
 }
+    #clock{
+    margin-top:15px;
+    font-size:24px;
+    font-weight:bold;
+    color:#60a5fa;
+}
 </style>
 
 <body>
@@ -392,6 +398,8 @@ h1{
 <footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
   ساخته شده توسط امیر مهدی حیدری &#10084;
 </footer>
+
+    <div id="clock"></div>
 
     
 <div id="account" onclick="openAccount()">
@@ -404,6 +412,8 @@ h1{
 
         <h2>ساخت حساب</h2>
 
+<input type="file" id="avatar">
+        
         <input
         id="username"
         placeholder="نام">
@@ -478,6 +488,55 @@ function search(){
 
 }
 
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById("clock").innerHTML =
+    now.toLocaleTimeString("fa-IR");
+
+}
+
+        if(!localStorage.getItem("joinDate")){
+
+   localStorage.setItem(
+      "joinDate",
+      new Date().toLocaleDateString("fa-IR")
+   );
+
+}
+
+        let count =
+Number(localStorage.getItem("searchCount") || 0);
+
+count++;
+
+localStorage.setItem(
+   "searchCount",
+   count
+);
+
+        const file =
+document.getElementById("avatar").files[0];
+
+const reader =
+new FileReader();
+
+reader.onload = () => {
+
+   localStorage.setItem(
+      "avatar",
+      reader.result
+   );
+
+};
+
+reader.readAsDataURL(file);
+
+setInterval(updateClock,1000);
+
+updateClock();
+        
 // باز کردن پنل حساب
 function openAccount() {
     document.getElementById("accountModal").style.display = "flex";
@@ -515,11 +574,12 @@ function loadUser() {
 
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
+
 </script>
 
 <footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
-  ساخته شده توسط امیر مهدی حیدری
+  ساخته شده توسط امیر مهدی حیدری &#10084;
 </footer>
-    
+        
 </body>
 </html>
