@@ -476,57 +476,43 @@ function search(){
 
 }
 
-function openAccount(){
-
-    document.getElementById("accountModal")
-    .style.display = "flex";
-
+// باز کردن پنل حساب
+function openAccount() {
+    document.getElementById("accountModal").style.display = "flex";
 }
-        function saveAccount(){
 
-    const name =
-    document.getElementById("username").value;
+// ذخیره اطلاعات کاربر
+function saveAccount() {
+    const name = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    const email =
-    document.getElementById("email").value;
-
-    if(!name || !email){
-
-        alert("نام و ایمیل را وارد کنید");
-
+    if (!name || !email) {
+        alert("لطفاً نام و ایمیل را وارد کنید");
         return;
     }
 
-    localStorage.setItem(
-        "utruxUser",
-        JSON.stringify({
-            name:name,
-            email:email
-        })
-    );
+    // ذخیره در LocalStorage
+    localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
 
-    document.getElementById("account")
-    .innerHTML =
-    "👤 " + name;
+    // بارگذاری اطلاعات برای نمایش در صفحه
+    loadUser();
 
-    document.getElementById("accountModal")
-    .style.display = "none";
-
+    // بستن پنل حساب
+    document.getElementById("accountModal").style.display = "none";
 }
-</script>
-    
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+
+// بارگذاری اطلاعات کاربر هنگام لود صفحه
+function loadUser() {
+    const user = JSON.parse(localStorage.getItem("utruxUser"));
+    if (user && user.name) {
+        document.getElementById("account").innerHTML = `👤 ${user.name}`;
+    } else {
+        document.getElementById("account").innerHTML = "👤 کاربر مهمان";
+    }
 }
-</script>
 
-<script>
-if("serviceWorker" in navigator){
-
-  navigator.serviceWorker.register("sw.js");
-
-}
+// اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
+window.addEventListener("DOMContentLoaded", loadUser);
 </script>
 
 <footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
