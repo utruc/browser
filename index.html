@@ -795,6 +795,20 @@ document.getElementById(
     document.getElementById("searchCountText").innerHTML =
     "🔎 تعداد جستجوهای شما : " + searchCount;
 }
+        const avatar =
+localStorage.getItem("avatar");
+
+if(avatar){
+
+document.getElementById(
+"avatarPreview"
+).src = avatar;
+
+document.getElementById(
+"avatarPreview"
+).style.display = "block";
+
+}
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
