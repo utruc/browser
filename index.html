@@ -400,6 +400,30 @@ h1{
 
     z-index:9999;
 }
+    #userStats{
+
+    margin-top:15px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:12px;
+
+    padding:10px;
+
+    text-align:right;
+
+    color:white;
+
+    font-size:14px;
+
+    line-height:2;
+}
+
+#joinDateText,
+#searchCountText{
+
+    display:block;
+}
 </style>
 
 <body>
@@ -433,8 +457,13 @@ h1{
 
         <button onclick="saveAccount()">
             ذخیره
-        <p id="joinDateText"></p>
-<p id="searchCountText"></p>
+<div id="userStats">
+
+    <div id="joinDateText"></div>
+
+    <div id="searchCountText"></div>
+
+</div>
         </button>
 
     </div>
