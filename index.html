@@ -516,18 +516,6 @@ h1{
     cursor:pointer;
 }
 
-#avatarPreview{
-
-    width:26px;
-
-    height:26px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    display:none;
-}
 </style>
 <div id="shortcutModal" class="modal">
 
@@ -598,8 +586,6 @@ onclick="closeShortcutManager()">
     <div class="modal-content">
 
         <h2>ساخت حساب</h2>
-
-        <input type="file" id="avatar">
 
         <input id="username" placeholder="نام">
 
@@ -1088,8 +1074,6 @@ document.getElementById(
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
 
     // بارگذاری اطلاعات برای نمایش در صفحه
-    const file =
-document.getElementById("avatar").files[0];
 
 if(file){
 
@@ -1148,20 +1132,6 @@ document.getElementById(
 
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
-        const avatar =
-localStorage.getItem("avatar");
-
-if(avatar){
-
-document.getElementById(
-"avatarPreview"
-).src = avatar;
-
-document.getElementById(
-"avatarPreview"
-).style.display = "block";
-
-}
 
     function openHistory(){
 
