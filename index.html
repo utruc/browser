@@ -554,6 +554,26 @@ onclick="saveShortcut()">
 </div>
 
 </div>
+
+    <div id="shortcutManager" class="modal">
+
+<div class="modal-content">
+
+<h2>مدیریت شورتکات‌ها</h2>
+
+<div id="shortcutList"></div>
+
+<button
+class="save-btn"
+onclick="closeShortcutManager()">
+
+بازگشت
+
+</button>
+c
+</div>
+
+</div>
     
 <body>
 
@@ -664,6 +684,14 @@ onclick="openHistory()">
 <div class="plus">+</div>
 
 <span>افزودن</span>
+
+</a>
+
+        <a class="card" href="#" onclick="openShortcutManager();return false;">
+
+<div class="plus">-</div>
+
+<span>حذف</span>
 
 </a>
 
@@ -1327,6 +1355,103 @@ window.addEventListener(
 "DOMContentLoaded",
 loadCustomShortcuts
 );  
+
+function openShortcutManager(){
+
+document.getElementById(
+"shortcutManager"
+).style.display = "flex";
+
+loadShortcutManager();
+
+}
+
+function closeShortcutManager(){
+
+document.getElementById(
+"shortcutManager"
+).style.display = "none";
+
+}
+
+function loadShortcutManager(){
+
+const shortcuts =
+JSON.parse(
+localStorage.getItem(
+"customShortcuts"
+) || "[]"
+);
+
+const box =
+document.getElementById(
+"shortcutList"
+);
+
+box.innerHTML = "";
+
+shortcuts.forEach((item,index)=>{
+
+box.innerHTML += `
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+margin-top:10px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+">
+
+<span>${item.name}</span>
+
+<button
+onclick="removeShortcut(${index})"
+style="
+background:red;
+border:none;
+color:white;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+">
+
+❌
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function removeShortcut(index){
+
+let shortcuts =
+JSON.parse(
+localStorage.getItem(
+"customShortcuts"
+) || "[]"
+);
+
+shortcuts.splice(index,1);
+
+localStorage.setItem(
+"customShortcuts",
+JSON.stringify(shortcuts)
+);
+
+loadCustomShortcuts();
+
+loadShortcutManager();
+
+}
+        
+        
 </script>
 
         
