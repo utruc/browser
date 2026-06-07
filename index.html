@@ -283,7 +283,7 @@ h1{
     visibility:visible !important;
     opacity:1 !important;
 }
-    .modal{
+.modal{
 
     display:none;
 
@@ -294,6 +294,7 @@ h1{
     background:rgba(0,0,0,.6);
 
     align-items:center;
+
     justify-content:center;
 
     z-index:9999;
@@ -720,8 +721,12 @@ setInterval(updateClock,1000);
 updateClock();
         
 // باز کردن پنل حساب
-function openAccount() {
-    document.getElementById("accountModal").style.display = "flex";
+function openAccount(){
+
+    document.getElementById(
+        "accountModal"
+    ).style.display = "flex";
+
 }
 
 // ذخیره اطلاعات کاربر
