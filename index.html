@@ -443,6 +443,33 @@ h1{
     background:rgba(255,255,255,.15);
 
 }
+    .shortcuts-buttons{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.shortcuts-buttons button{
+  padding:10px 15px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+  font-size:14px;
+  transition:.25s;
+}
+.shortcuts-buttons button:hover{background:#3b82f6;}
+
+.panel{
+  margin:15px auto;
+  max-width:500px;
+  background:#111827;
+  padding:15px;
+  border-radius:15px;
+  display:block;
+}
 
 .panel{
   position:fixed;
@@ -644,25 +671,28 @@ h1{
             <img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=64">
             <span>Wiki</span>
         </a>
+<div class="shortcuts-buttons">
+  <button onclick="togglePanel('downloadPanel')">📥 دانلود منیجر</button>
+  <button onclick="togglePanel('calcPanel')">🧮 ماشین حساب</button>
+  <button onclick="togglePanel('translatorPanel')">🌐 مترجم</button>
+</div>
 
-<!-- دانلود منیجر -->
-<div class="panel" id="downloadPanel" style="top:80px;">
+<!-- محتویات پنل‌ها -->
+<div class="panel" id="downloadPanel" style="display:none;">
   <h3>دانلود منیجر</h3>
   <input type="text" id="downloadURL" placeholder="لینک فایل">
   <button onclick="downloadFile()">دانلود</button>
   <div id="downloadList"></div>
 </div>
 
-<!-- ماشین حساب -->
-<div class="panel" id="calcPanel" style="top:350px;">
+<div class="panel" id="calcPanel" style="display:none;">
   <h3>ماشین حساب</h3>
   <input type="text" id="calcInput" placeholder="مثال: 5+3*2">
   <button onclick="calculate()">محاسبه</button>
   <div id="calcResult"></div>
 </div>
 
-<!-- مترجم -->
-<div class="panel" id="translatorPanel" style="top:600px;">
+<div class="panel" id="translatorPanel" style="display:none;">
   <h3>مترجم</h3>
   <textarea id="translateInput" placeholder="متن خود را وارد کنید"></textarea>
   <button onclick="translateText()">ترجمه</button>
@@ -700,6 +730,14 @@ function updateClock(){
     document.getElementById("clock").innerHTML =
     now.toLocaleTimeString("fa-IR");
 
+}
+        function togglePanel(id){
+  const panel = document.getElementById(id);
+  if(panel.style.display === "none" || panel.style.display === ""){
+    panel.style.display = "block";
+  } else {
+    panel.style.display = "none";
+  }
 }
   function toggleInfo() {
 
