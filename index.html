@@ -740,14 +740,16 @@ localStorage.getItem(
 );
 
 shortcuts.push({
-name,
-url
+name:name,
+url:url
 });
 
 localStorage.setItem(
 "customShortcuts",
 JSON.stringify(shortcuts)
 );
+
+alert("شورتکات ذخیره شد");
 
 loadCustomShortcuts();
 
@@ -756,7 +758,6 @@ document.getElementById(
 ).style.display = "none";
 
 }
-
 function loadCustomShortcuts(){
 
 const shortcuts =
@@ -788,62 +789,19 @@ card.className =
 card.href =
 item.url;
 
+card.target = "_blank";
+
 card.innerHTML = `
 <img src="https://www.google.com/s2/favicons?domain=${item.url}&sz=64">
 <span>${item.name}</span>
 `;
 
-box.insertBefore(
-card,
-document.querySelector(".add-card")
-);
+box.appendChild(card);
 
 });
 
 }
-
-window.addEventListener(
-"DOMContentLoaded",
-loadCustomShortcuts
-);
-
-    let history =
-    JSON.parse(
-    localStorage.getItem("searchHistory") || "[]"
-    );
-
-    history.unshift(q);
-
-    localStorage.setItem(
-    "searchHistory",
-    JSON.stringify(history)
-    );
-
-    const domainPattern =
-    /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-
-    if(
-        q.startsWith("http://") ||
-        q.startsWith("https://")
-    ){
-        window.location.href = q;
-        return;
-    }
-
-    if(
-        q.startsWith("www.") ||
-        domainPattern.test(q)
-    ){
-        window.location.href =
-        "https://" + q;
-        return;
-    }
-
-    window.location.href =
-    "https://utruc.github.io/utrux-search/?q=" +
-    encodeURIComponent(q);
-
-}function search(){
+function search(){
 
     const q =
     document.getElementById("query").value.trim();
