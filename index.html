@@ -554,6 +554,33 @@ onclick="saveShortcut()">
 </div>
 
 </div>
+
+<div id="shortcutModal" class="modal">
+
+<div class="modal-content">
+
+<h2>افزودن شورتکات</h2>
+
+<input
+id="shortcutName"
+placeholder="نام سایت">
+
+<input
+id="shortcutUrl"
+placeholder="لینک سایت">
+
+<button
+class="save-btn"
+onclick="saveShortcut()">
+
+ذخیره
+
+</button>
+
+</div>
+
+</div>
+    
 <body>
 
 
@@ -684,14 +711,6 @@ function search(){
         "searchCount",
         count
     );
-
-    function openShortcutModal(){
-
-document.getElementById(
-"shortcutModal"
-).style.display = "flex";
-
-}
 
 function saveShortcut(){
 
@@ -1207,6 +1226,14 @@ localStorage.removeItem(
 loadHistory();
 
 }
+
+}
+
+        function openShortcutModal(){
+
+document.getElementById(
+"shortcutModal"
+).style.display = "flex";
 
 }
         
