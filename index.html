@@ -528,8 +528,99 @@ h1{
 
     display:none;
 }
-</style>
+    #newsSection{
 
+margin-top:60px;
+
+padding:20px;
+
+}
+
+#newsContainer{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.news-card{
+
+background:rgba(255,255,255,.08);
+
+border-radius:15px;
+
+padding:15px;
+
+backdrop-filter:blur(20px);
+
+text-align:right;
+
+}
+
+.news-card a{
+
+color:white;
+
+text-decoration:none;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+.news-card p{
+
+margin-top:8px;
+
+color:#cbd5e1;
+
+font-size:14px;
+
+}
+
+#loadMoreBtn{
+
+margin-top:20px;
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:15px;
+
+background:#2563eb;
+
+color:white;
+
+cursor:pointer;
+
+font-family:Vazirmatn,sans-serif;
+
+}
+
+#loadMoreBtn:hover{
+
+background:#3b82f6;
+
+}
+</style>
+<div id="newsSection">
+
+<h2>📰 اخبار روز</h2>
+
+<div id="newsContainer"></div>
+
+<button id="loadMoreBtn" onclick="loadMoreNews()">
+بیشتر
+</button>
+
+</div>
 <body>
 
 
@@ -856,6 +947,71 @@ border-radius:12px;
 });
 
 }
+        let page = 1;
+
+async function loadNews(){
+
+const apiKey =
+"3b2f66fadae543de8f158301bea0dca5";
+
+const url =
+`https://newsapi.org/v2/top-headlines?country=us&pageSize=10&page=${page}&apiKey=${apiKey}`;
+
+try{
+
+const res =
+await fetch(url);
+
+const data =
+await res.json();
+
+const box =
+document.getElementById(
+"newsContainer"
+);
+
+data.articles.forEach(news=>{
+
+box.innerHTML += `
+<div class="news-card">
+
+<a href="${news.url}" target="_blank">
+
+${news.title}
+
+</a>
+
+<p>
+
+${news.description || ""}
+
+</p>
+
+</div>
+`;
+
+});
+
+}catch{
+
+document.getElementById(
+"newsContainer"
+).innerHTML =
+"خطا در دریافت اخبار";
+
+}
+
+}
+
+function loadMoreNews(){
+
+page++;
+
+loadNews();
+
+}
+
+loadNews();
   function toggleInfo() {
 
     const box =
