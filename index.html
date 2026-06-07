@@ -1068,23 +1068,6 @@ updateClock();
 // باز کردن پنل حساب
 function openAccount(){
 
-const user =
-JSON.parse(
-localStorage.getItem("utruxUser")
-);
-
-if(user){
-
-document.getElementById(
-"username"
-).value = user.name || "";
-
-document.getElementById(
-"email"
-).value = user.email || "";
-
-}
-
 document.getElementById(
 "accountModal"
 ).style.display = "flex";
