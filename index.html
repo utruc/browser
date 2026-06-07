@@ -672,9 +672,19 @@ h1{
             <span>Wiki</span>
         </a>
 <div class="shortcuts-buttons">
-  <button onclick="togglePanel('downloadPanel')">📥 دانلود منیجر</button>
-  <button onclick="togglePanel('calcPanel')">🧮 ماشین حساب</button>
-  <button onclick="togglePanel('translatorPanel')">🌐 مترجم</button>
+<div class="shortcuts" id="extraShortcuts">
+  <a class="card" href="javascript:void(0)" onclick="togglePanel('downloadPanel')">
+    <div class="letter-icon">📥</div>
+    <span>دانلود منیجر</span>
+  </a>
+  <a class="card" href="javascript:void(0)" onclick="togglePanel('calcPanel')">
+    <div class="letter-icon">🧮</div>
+    <span>ماشین حساب</span>
+  </a>
+  <a class="card" href="javascript:void(0)" onclick="togglePanel('translatorPanel')">
+    <div class="letter-icon">🌐</div>
+    <span>مترجم</span>
+  </a>
 </div>
 
 <!-- محتویات پنل‌ها -->
