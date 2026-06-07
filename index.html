@@ -767,30 +767,7 @@ document.getElementById(
 ).textContent = user.name;
 
     }
-    
-    const avatar =
-localStorage.getItem("avatar");
-
-if(avatar){
-
-    document.getElementById(
-        "avatarPreview"
-    ).src = avatar;
-
-    document.getElementById(
-        "avatarPreview"
-    ).style.display = "block";
-
-}
-    
-if(!avatar){
-
-    document.getElementById(
-        "avatarPreview"
-    ).style.display = "none";
-
-}
-    
+        
     const joinDate =
     localStorage.getItem("joinDate") || "ثبت نشده";
 
