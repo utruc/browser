@@ -385,11 +385,20 @@ h1{
     padding:12px;
 }
 #clock{
-    margin:15px 0 25px 0;
+    position:fixed;
+    bottom:20px;
+    left:20px;
+
     font-size:24px;
     font-weight:bold;
     color:#60a5fa;
-    text-align:center;
+
+    background:rgba(255,255,255,.08);
+    padding:10px 15px;
+    border-radius:15px;
+    backdrop-filter:blur(20px);
+
+    z-index:9999;
 }
 </style>
 
