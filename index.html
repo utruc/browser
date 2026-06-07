@@ -595,6 +595,61 @@ onclick="closeShortcutManager()">
 </div>
 <div id="accountModal" class="modal">
 
+    <div style="text-align:center;">
+
+<img id="profileImage"
+style="
+width:90px;
+height:90px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:15px;
+">
+
+<div id="profileName"></div>
+
+<div id="profileEmail"></div>
+
+<div id="joinDateText"></div>
+
+<div id="searchCountText"></div>
+
+<button
+class="save-btn"
+onclick="openEditAccount()">
+
+✏️ ویرایش حساب
+
+</button>
+
+</div>
+
+<div id="editAccountModal" class="modal">
+
+<div class="modal-content">
+
+<h2>ویرایش حساب</h2>
+
+<input type="file" id="avatar">
+
+<input id="username" placeholder="نام">
+
+<input id="email" placeholder="ایمیل">
+
+<button
+class="save-btn"
+onclick="saveAccount()">
+
+ذخیره
+
+</button>
+
+</div>
+
+</div>
+    
+    
+
     <div class="modal-content">
 
         <h2>ساخت حساب</h2>
@@ -1122,17 +1177,35 @@ loadUser();
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
 
-    const user =
-    JSON.parse(localStorage.getItem("utruxUser"));
+const user =
+JSON.parse(
+localStorage.getItem("utruxUser")
+);
 
-    if(user){
+if(user){
 
 document.getElementById(
-    "accountName"
-).textContent = user.name;
+"profileName"
+).innerHTML =
+"👤 نام: " + user.name;
 
-    }
-        
+document.getElementById(
+"profileEmail"
+).innerHTML =
+"📧 ایمیل: " + user.email;
+
+}
+
+const avatar =
+localStorage.getItem("avatar");
+
+if(avatar){
+
+document.getElementById(
+"profileImage"
+).src = avatar;
+
+}
     const joinDate =
     localStorage.getItem("joinDate") || "ثبت نشده";
 
@@ -1458,6 +1531,14 @@ loadCustomShortcuts();
 loadShortcutManager();
 
 }     
+
+function openEditAccount(){
+
+document.getElementById(
+"editAccountModal"
+).style.display = "flex";
+
+}
         
 </script>
 
