@@ -554,32 +554,6 @@ onclick="saveShortcut()">
 </div>
 
 </div>
-
-<div id="shortcutModal" class="modal">
-
-<div class="modal-content">
-
-<h2>افزودن شورتکات</h2>
-
-<input
-id="shortcutName"
-placeholder="نام سایت">
-
-<input
-id="shortcutUrl"
-placeholder="لینک سایت">
-
-<button
-class="save-btn"
-onclick="saveShortcut()">
-
-ذخیره
-
-</button>
-
-</div>
-
-</div>
     
 <body>
 
@@ -1229,14 +1203,130 @@ loadHistory();
 
 }
 
-        function openShortcutModal(){
+function openShortcutModal(){
 
 document.getElementById(
 "shortcutModal"
 ).style.display = "flex";
 
 }
-        
+
+function saveShortcut(){
+
+const name =
+document.getElementById(
+"shortcutName"
+).value.trim();
+
+let url =
+document.getElementById(
+"shortcutUrl"
+).value.trim();
+
+if(!name || !url){
+
+alert("نام و لینک را وارد کنید");
+
+return;
+
+}
+
+if(
+!url.startsWith("http://") &&
+!url.startsWith("https://")
+){
+
+url = "https://" + url;
+
+}
+
+let shortcuts =
+JSON.parse(
+localStorage.getItem(
+"customShortcuts"
+) || "[]"
+);
+
+shortcuts.push({
+name:name,
+url:url
+});
+
+localStorage.setItem(
+"customShortcuts",
+JSON.stringify(shortcuts)
+);
+
+loadCustomShortcuts();
+
+document.getElementById(
+"shortcutModal"
+).style.display = "none";
+
+document.getElementById(
+"shortcutName"
+).value = "";
+
+document.getElementById(
+"shortcutUrl"
+).value = "";
+
+alert("✅ شورتکات ذخیره شد");
+
+}
+
+function loadCustomShortcuts(){
+
+const shortcuts =
+JSON.parse(
+localStorage.getItem(
+"customShortcuts"
+) || "[]"
+);
+
+const box =
+document.getElementById(
+"shortcuts"
+);
+
+document
+.querySelectorAll(
+".custom-shortcut"
+)
+.forEach(el=>el.remove());
+
+shortcuts.forEach(item=>{
+
+const card =
+document.createElement("a");
+
+card.className =
+"card custom-shortcut";
+
+card.href =
+item.url;
+
+card.innerHTML = `
+
+<img src="https://www.google.com/s2/favicons?domain=${item.url}&sz=64">
+
+<span>${item.name}</span>
+
+`;
+
+box.insertBefore(
+card,
+document.querySelector(".add-card")
+);
+
+});
+
+}
+
+window.addEventListener(
+"DOMContentLoaded",
+loadCustomShortcuts
+);  
 </script>
 
         
