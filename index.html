@@ -528,47 +528,8 @@ h1{
 
     display:none;
 }
-    #bookmarkIcon{
-
-position:absolute;
-
-top:245px;
-
-right:20px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-#bookmarkIcon:hover{
-
-transform:scale(1.15);
-
-}
 </style>
 
-<div id="bookmarkModal" class="modal">
-
-<div class="modal-content">
-
-<h2>بوکمارک‌ها</h2>
-
-<div id="bookmarkList"></div>
-
-<button
-class="save-btn"
-onclick="closeBookmarks()">
-
-بازگشت
-
-</button>
-
-</div>
-
-</div>
-    
 <body>
 
 
@@ -626,21 +587,15 @@ onclick="closeBookmarks()">
 <div id="clock"></div>
 <div class="search-box">
 
-<div class="search-box">
-
-<div id="bookmarkIcon" onclick="addBookmark()">
-🔖
-</div>
-
-<input
-id="query"
-type="text"
-placeholder="هر چیزی را که میخواهید جستجو کنید...">
+    
+    <input
+    id="query"
+    type="text"
+    placeholder="هر چیزی را که میخواهید جستجو کنید...">
 
 <button onclick="search()">
 جستجو
 </button>
-
 </div>
 
 
@@ -678,17 +633,7 @@ onclick="openHistory()">
             <img src="image.png">
             <span>پیشفرض کردن</span>
         </a>
-
-<a class="card"
-href="javascript:void(0)"
-onclick="openBookmarks()">
-
-<div class="letter-icon">⭐</div>
-
-<span>بوکمارک</span>
-
-</a>
-        
+    
 </div>
 
     <script>
@@ -1071,88 +1016,6 @@ document.getElementById(
 ).style.display = "flex";
 
 loadHistory();
-
-}
-
-        function addBookmark(){
-
-const q =
-document.getElementById("query").value.trim();
-
-if(!q){
-
-alert("ابتدا یک لینک وارد کنید");
-
-return;
-
-}
-
-let bookmarks =
-JSON.parse(
-localStorage.getItem("bookmarks") || "[]"
-);
-
-bookmarks.unshift(q);
-
-localStorage.setItem(
-"bookmarks",
-JSON.stringify(bookmarks)
-);
-
-alert("⭐ در بوکمارک‌ها ذخیره شد");
-
-}
-
-function openBookmarks(){
-
-document.getElementById(
-"bookmarkModal"
-).style.display = "flex";
-
-loadBookmarks();
-
-}
-
-function closeBookmarks(){
-
-document.getElementById(
-"bookmarkModal"
-).style.display = "none";
-
-}
-
-function loadBookmarks(){
-
-const bookmarks =
-JSON.parse(
-localStorage.getItem("bookmarks") || "[]"
-);
-
-const box =
-document.getElementById(
-"bookmarkList"
-);
-
-box.innerHTML = "";
-
-bookmarks.forEach(item=>{
-
-box.innerHTML += `
-<a href="https://${item}"
-style="
-display:block;
-padding:10px;
-margin-top:10px;
-background:rgba(255,255,255,.08);
-border-radius:12px;
-color:white;
-text-decoration:none;
-">
-⭐ ${item}
-</a>
-`;
-
-});
 
 }
 
