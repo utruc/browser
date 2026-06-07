@@ -1088,7 +1088,7 @@ document.getElementById(
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
 
     // بارگذاری اطلاعات برای نمایش در صفحه
-    const file =
+const file =
 document.getElementById("avatar").files[0];
 
 if(file){
@@ -1096,7 +1096,7 @@ if(file){
 const reader =
 new FileReader();
 
-reader.onload = () => {
+reader.onload = function(){
 
 localStorage.setItem(
 "avatar",
@@ -1109,10 +1109,6 @@ loadUser();
 
 reader.readAsDataURL(file);
 
-}else{
-
-loadUser();
-
 }
 
     // بستن پنل حساب
@@ -1120,35 +1116,22 @@ loadUser();
 }
 
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
-function loadUser() {
+function loadUser(){
 
-    const user =
-    JSON.parse(localStorage.getItem("utruxUser"));
+const user =
+JSON.parse(
+localStorage.getItem("utruxUser")
+);
 
-    if(user){
+if(user){
 
 document.getElementById(
-    "accountName"
+"accountName"
 ).textContent = user.name;
 
-    }
-        
-    const joinDate =
-    localStorage.getItem("joinDate") || "ثبت نشده";
-
-    const searchCount =
-    localStorage.getItem("searchCount") || 0;
-
-    document.getElementById("joinDateText").innerHTML =
-    "📅 تاریخ عضویت: " + joinDate;
-
-    document.getElementById("searchCountText").innerHTML =
-    "🔎 تعداد جستجوهای شما : " + searchCount;
 }
 
-// اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
-window.addEventListener("DOMContentLoaded", loadUser);
-        const avatar =
+const avatar =
 localStorage.getItem("avatar");
 
 if(avatar){
@@ -1163,6 +1146,20 @@ document.getElementById(
 
 }
 
+const joinDate =
+localStorage.getItem("joinDate") || "ثبت نشده";
+
+const searchCount =
+localStorage.getItem("searchCount") || 0;
+
+document.getElementById("joinDateText").innerHTML =
+"📅 تاریخ عضویت: " + joinDate;
+
+document.getElementById("searchCountText").innerHTML =
+"🔎 تعداد جستجوهای شما: " + searchCount;
+
+}
+        
     function openHistory(){
 
 document.getElementById(
