@@ -412,6 +412,37 @@ h1{
     background:#3b82f6;
 }
 
+    .save-btn{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-family:'Vazirmatn',sans-serif;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(20px);
+
+    transition:.25s;
+}
+
+.save-btn:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
 #extraInfo{
 
     margin-top:12px;
@@ -468,6 +499,42 @@ h1{
 
     display:block;
 }
+    #account{
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:rgba(255,255,255,.08);
+
+    padding:10px 15px;
+
+    border-radius:15px;
+
+    backdrop-filter:blur(20px);
+
+    cursor:pointer;
+}
+
+#avatarPreview{
+
+    width:26px;
+
+    height:26px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    display:none;
+}
 </style>
 
 <body>
@@ -480,12 +547,12 @@ h1{
 
     
 <div id="account" onclick="openAccount()">
-    👤 کاربر مهمان
+
+    <img id="avatarPreview" src="" />
+
+    <span id="accountName">کاربر مهمان</span>
+
 </div>
-
-<div id="accountModal" class="modal">
-
-    <div class="modal-content">
 
         <h2>ساخت حساب</h2>
 
@@ -499,9 +566,9 @@ h1{
         id="email"
         placeholder="ایمیل">
 
-        <button onclick="saveAccount()">
-            ذخیره
-<div id="userStats">
+<button class="save-btn" onclick="saveAccount()">
+💾 ذخیره
+</button>
     <button class="extra-btn" onclick="toggleInfo()">
     ℹ️ اطلاعات اضافی
 </button>
@@ -697,7 +764,30 @@ function loadUser() {
         "👤 " + user.name;
 
     }
+    
+    const avatar =
+localStorage.getItem("avatar");
 
+if(avatar){
+
+    document.getElementById(
+        "avatarPreview"
+    ).src = avatar;
+
+    document.getElementById(
+        "avatarPreview"
+    ).style.display = "block";
+
+}
+    
+if(!avatar){
+
+    document.getElementById(
+        "avatarPreview"
+    ).style.display = "none";
+
+}
+    
     const joinDate =
     localStorage.getItem("joinDate") || "ثبت نشده";
 
