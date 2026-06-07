@@ -562,38 +562,6 @@ h1{
 
     cursor:pointer;
 }
-    #backHistoryBtn{
-
-position:fixed;
-
-top:50%;
-
-left:calc(50% - 230px);
-
-transform:translateY(-50%);
-
-width:55px;
-height:55px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(20px);
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:24px;
-
-cursor:pointer;
-
-z-index:10001;
-
-transition:.25s;
-
-}
 
 #backHistoryBtn:hover{
 
@@ -783,15 +751,7 @@ function updateClock(){
     document.getElementById("clock").innerHTML =
     now.toLocaleTimeString("fa-IR");
 
-}
-        function closeHistory(){
-
-document.getElementById(
-"historyModal"
-).style.display = "none";
-
-}
-        
+}    
 function togglePanel(id){
   const panel = document.getElementById(id);
   if(panel.style.display === "none" || panel.style.display === ""){
@@ -804,10 +764,6 @@ function togglePanel(id){
 
 document.getElementById(
 "historyModal"
-).style.display = "none";
-
-document.getElementById(
-"backHistoryBtn"
 ).style.display = "none";
 
 }
