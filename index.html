@@ -667,6 +667,14 @@ onclick="openHistory()">
 
 </a>
 
+<a class="card" href="#" onclick="toggleDeleteMode();return false;">
+
+<div class="plus">-</div>
+
+<span>حذف</span>
+
+</a>
+
     <script>
 
 function search(){
@@ -1275,27 +1283,25 @@ alert("✅ شورتکات ذخیره شد");
 
 }
 
-function loadCustomShortcuts(){
+        let deleteMode = false;
 
-const shortcuts =
-JSON.parse(
-localStorage.getItem(
-"customShortcuts"
-) || "[]"
-);
+function toggleDeleteMode(){
 
-const box =
-document.getElementById(
-"shortcuts"
-);
+deleteMode = !deleteMode;
 
-document
-.querySelectorAll(
-".custom-shortcut"
-)
-.forEach(el=>el.remove());
+if(deleteMode){
 
-shortcuts.forEach(item=>{
+alert("حالت حذف فعال شد");
+
+}else{
+
+alert("حالت حذف غیرفعال شد");
+
+}
+
+}
+
+shortcuts.forEach((item,index)=>{
 
 const card =
 document.createElement("a");
@@ -1314,19 +1320,35 @@ card.innerHTML = `
 
 `;
 
+card.onclick = function(e){
+
+if(deleteMode){
+
+e.preventDefault();
+
+if(confirm("این شورتکات حذف شود؟")){
+
+shortcuts.splice(index,1);
+
+localStorage.setItem(
+"customShortcuts",
+JSON.stringify(shortcuts)
+);
+
+loadCustomShortcuts();
+
+}
+
+}
+
+};
+
 box.insertBefore(
 card,
 document.querySelector(".add-card")
 );
 
-});
-
-}
-
-window.addEventListener(
-"DOMContentLoaded",
-loadCustomShortcuts
-);  
+});   
 </script>
 
         
