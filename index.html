@@ -742,6 +742,29 @@ function openAccount(){
     document.getElementById("accountModal").style.display = "none";
 }
 
+        //پروفایل
+        const file =
+document.getElementById("avatar").files[0];
+
+if(file){
+
+    const reader =
+    new FileReader();
+
+    reader.onload = function(){
+
+        localStorage.setItem(
+            "avatar",
+            reader.result
+        );
+
+        loadUser();
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
 
@@ -750,10 +773,15 @@ function loadUser() {
 
     if(user){
 
-document.getElementById(
-    "accountName"
-).textContent = user.name;
-
+if(!avatar){
+    document.getElementById(
+        "accountName"
+    ).textContent = "👤 " + user.name;
+}else{
+    document.getElementById(
+        "accountName"
+    ).textContent = user.name;
+}
     }
         
     const joinDate =
@@ -761,7 +789,28 @@ document.getElementById(
 
     const searchCount =
     localStorage.getItem("searchCount") || 0;
+const user =
+JSON.parse(localStorage.getItem("utruxUser"));
+    const avatar =
+localStorage.getItem("avatar");
 
+if(avatar){
+
+    document.getElementById(
+        "avatarPreview"
+    ).src = avatar;
+
+    document.getElementById(
+        "avatarPreview"
+    ).style.display = "block";
+
+}else{
+
+    document.getElementById(
+        "avatarPreview"
+    ).style.display = "none";
+
+}
     document.getElementById("joinDateText").innerHTML =
     "📅 تاریخ عضویت: " + joinDate;
 
