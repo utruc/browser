@@ -528,8 +528,47 @@ h1{
 
     display:none;
 }
+    #bookmarkIcon{
+
+position:absolute;
+
+top:245px;
+
+right:20px;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+#bookmarkIcon:hover{
+
+transform:scale(1.15);
+
+}
 </style>
 
+<div id="bookmarkModal" class="modal">
+
+<div class="modal-content">
+
+<h2>بوکمارک‌ها</h2>
+
+<div id="bookmarkList"></div>
+
+<button
+class="save-btn"
+onclick="closeBookmarks()">
+
+بازگشت
+
+</button>
+
+</div>
+
+</div>
+    
 <body>
 
 
@@ -587,6 +626,17 @@ h1{
 <div id="clock"></div>
 <div class="search-box">
 
+    <div id="bookmarkIcon" onclick="addBookmark()">
+
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+
+<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+
+</svg>
+
+</div>
+
+    
     <input
     id="query"
     type="text"
@@ -632,7 +682,17 @@ onclick="openHistory()">
             <img src="image.png">
             <span>پیشفرض کردن</span>
         </a>
-    
+
+<a class="card"
+href="javascript:void(0)"
+onclick="openBookmarks()">
+
+<div class="letter-icon">⭐</div>
+
+<span>بوکمارک</span>
+
+</a>
+        
 </div>
 
     <script>
@@ -1015,6 +1075,88 @@ document.getElementById(
 ).style.display = "flex";
 
 loadHistory();
+
+}
+
+        function addBookmark(){
+
+const q =
+document.getElementById("query").value.trim();
+
+if(!q){
+
+alert("ابتدا یک لینک وارد کنید");
+
+return;
+
+}
+
+let bookmarks =
+JSON.parse(
+localStorage.getItem("bookmarks") || "[]"
+);
+
+bookmarks.unshift(q);
+
+localStorage.setItem(
+"bookmarks",
+JSON.stringify(bookmarks)
+);
+
+alert("⭐ در بوکمارک‌ها ذخیره شد");
+
+}
+
+function openBookmarks(){
+
+document.getElementById(
+"bookmarkModal"
+).style.display = "flex";
+
+loadBookmarks();
+
+}
+
+function closeBookmarks(){
+
+document.getElementById(
+"bookmarkModal"
+).style.display = "none";
+
+}
+
+function loadBookmarks(){
+
+const bookmarks =
+JSON.parse(
+localStorage.getItem("bookmarks") || "[]"
+);
+
+const box =
+document.getElementById(
+"bookmarkList"
+);
+
+box.innerHTML = "";
+
+bookmarks.forEach(item=>{
+
+box.innerHTML += `
+<a href="https://${item}"
+style="
+display:block;
+padding:10px;
+margin-top:10px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+color:white;
+text-decoration:none;
+">
+⭐ ${item}
+</a>
+`;
+
+});
 
 }
 
