@@ -684,22 +684,6 @@ function updateClock(){
 
 }
 
-const file =
-document.getElementById("avatar").files[0];
-
-if(file){
-   const reader = new FileReader();
-
-   reader.onload = () => {
-      localStorage.setItem(
-         "avatar",
-         reader.result
-      );
-   };
-
-   reader.readAsDataURL(file);
-}
-
 setInterval(updateClock,1000);
 
 updateClock();
@@ -707,18 +691,26 @@ updateClock();
 // باز کردن پنل حساب
 function openAccount(){
 
-    document.getElementById(
-        "accountModal"
-    ).style.display = "flex";
+const user =
+JSON.parse(
+localStorage.getItem("utruxUser")
+);
+
+if(user){
+
+document.getElementById(
+"username"
+).value = user.name || "";
+
+document.getElementById(
+"email"
+).value = user.email || "";
 
 }
-        const avatar =
-localStorage.getItem("avatar");
 
-if(avatar){
-
-    avatarPreview.src = avatar;
-    avatarPreview.style.display = "block";
+document.getElementById(
+"accountModal"
+).style.display = "flex";
 
 }
 
@@ -745,28 +737,30 @@ if(avatar){
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
 
     // بارگذاری اطلاعات برای نمایش در صفحه
-    const file = document.getElementById("avatar").files[0];
+    const file =
+document.getElementById("avatar").files[0];
 
 if(file){
 
-    const reader = new FileReader();
+const reader =
+new FileReader();
 
-    reader.onload = () => {
+reader.onload = () => {
 
-        localStorage.setItem(
-            "avatar",
-            reader.result
-        );
+localStorage.setItem(
+"avatar",
+reader.result
+);
 
-        loadUser();
+loadUser();
 
-    };
+};
 
-    reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
 }else{
 
-    loadUser();
+loadUser();
 
 }
         loadUser();
@@ -801,20 +795,11 @@ document.getElementById(
     document.getElementById("searchCountText").innerHTML =
     "🔎 تعداد جستجوهای شما : " + searchCount;
 }
-        const avatar = localStorage.getItem("avatar");
-
-if(avatar){
-    avatarPreview.src = avatar;
-    avatarPreview.style.display = "block";
-}
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
 </script>
 
-<footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
-  ساخته شده توسط امیر مهدی حیدری &#10084;
-</footer>
         
 </body>
 </html>
