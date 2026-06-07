@@ -444,6 +444,23 @@ h1{
 
 }
 
+.panel{
+  position:fixed;
+  right:20px;
+  width:300px;
+  background:#111827;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(0,0,0,.5);
+  z-index:10000;
+}
+.panel h3{margin-bottom:12px;text-align:center;}
+.panel input, .panel textarea{width:100%;margin:5px 0;padding:10px;border-radius:10px;border:none;}
+.panel button{width:100%;padding:10px;margin-top:8px;border:none;border-radius:12px;background:#2563eb;color:white;cursor:pointer;transition:.25s;}
+.panel button:hover{background:#3b82f6;}
+#downloadList{max-height:200px;overflow-y:auto;margin-top:10px;}
+.download-item{background:rgba(255,255,255,.1);padding:8px;margin-bottom:5px;border-radius:10px;font-size:14px;}
+    
 #extraInfo{
 
     margin-top:12px;
@@ -628,6 +645,29 @@ h1{
             <span>Wiki</span>
         </a>
 
+<!-- دانلود منیجر -->
+<div class="panel" id="downloadPanel" style="top:80px;">
+  <h3>دانلود منیجر</h3>
+  <input type="text" id="downloadURL" placeholder="لینک فایل">
+  <button onclick="downloadFile()">دانلود</button>
+  <div id="downloadList"></div>
+</div>
+
+<!-- ماشین حساب -->
+<div class="panel" id="calcPanel" style="top:350px;">
+  <h3>ماشین حساب</h3>
+  <input type="text" id="calcInput" placeholder="مثال: 5+3*2">
+  <button onclick="calculate()">محاسبه</button>
+  <div id="calcResult"></div>
+</div>
+
+<!-- مترجم -->
+<div class="panel" id="translatorPanel" style="top:600px;">
+  <h3>مترجم</h3>
+  <textarea id="translateInput" placeholder="متن خود را وارد کنید"></textarea>
+  <button onclick="translateText()">ترجمه</button>
+  <div id="translateResult"></div>
+</div>
 </div>
 
     <script>
@@ -789,6 +829,53 @@ document.getElementById(
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
+// دانلود منیجر
+let downloads = [];
+function downloadFile(){
+  const url = document.getElementById("downloadURL").value.trim();
+  if(!url) return;
+  const fileName = url.split("/").pop();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName || "file";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  downloads.push(fileName);
+  updateDownloadList();
+  document.getElementById("downloadURL").value = "";
+}
+function updateDownloadList(){
+  const list = document.getElementById("downloadList");
+  list.innerHTML = "";
+  downloads.forEach(f=>{
+    const div = document.createElement("div");
+    div.className = "download-item";
+    div.textContent = f;
+    list.appendChild(div);
+  });
+}
+
+// ماشین حساب
+function calculate(){
+  const input = document.getElementById("calcInput").value.trim();
+  if(!input) return;
+  try{
+    const result = eval(input);
+    document.getElementById("calcResult").textContent = "نتیجه: " + result;
+  }catch(e){
+    document.getElementById("calcResult").textContent = "ورودی نامعتبر";
+  }
+}
+
+// مترجم (نمونه ساده)
+function translateText(){
+  const text = document.getElementById("translateInput").value.trim();
+  if(!text) return;
+  const translated = text.split("").reverse().join(""); // فقط جهت تست
+  document.getElementById("translateResult").textContent = translated;
+}
+        
 </script>
 
 <footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
