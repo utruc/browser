@@ -1431,6 +1431,14 @@ cursor:pointer;
 
 function removeShortcut(index){
 
+if(
+!confirm(
+"آیا از حذف این شورتکات مطمئن هستید؟"
+)
+){
+return;
+}
+
 let shortcuts =
 JSON.parse(
 localStorage.getItem(
@@ -1449,8 +1457,7 @@ loadCustomShortcuts();
 
 loadShortcutManager();
 
-}
-        
+}     
         
 </script>
 
