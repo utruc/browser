@@ -877,6 +877,74 @@ document.getElementById(
 ).style.display = "block";
 
 }
+
+    function openHistory(){
+
+document.getElementById(
+"historyModal"
+).style.display = "flex";
+
+loadHistory();
+
+}
+
+function loadHistory(){
+
+const history =
+JSON.parse(
+localStorage.getItem(
+"searchHistory"
+) || "[]"
+);
+
+const box =
+document.getElementById(
+"historyList"
+);
+
+box.innerHTML = "";
+
+if(history.length===0){
+
+box.innerHTML =
+"<p>تاریخچه خالی است</p>";
+
+return;
+
+}
+
+history.forEach(item=>{
+
+box.innerHTML += `
+<div style="
+padding:10px;
+margin-bottom:10px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+">
+🔎 ${item}
+</div>
+`;
+
+});
+
+}
+
+function clearHistory(){
+
+if(confirm(
+"تاریخچه پاک شود؟"
+)){
+
+localStorage.removeItem(
+"searchHistory"
+);
+
+loadHistory();
+
+}
+
+}
         
 </script>
 
