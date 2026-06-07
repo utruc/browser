@@ -681,6 +681,56 @@ function updateClock(){
     now.toLocaleTimeString("fa-IR");
 
 }
+        function openHistory(){
+
+document.getElementById(
+"historyModal"
+).style.display = "flex";
+
+loadHistory();
+
+}
+
+function closeHistory(){
+
+document.getElementById(
+"historyModal"
+).style.display = "none";
+
+}
+
+function loadHistory(){
+
+const history =
+JSON.parse(
+localStorage.getItem(
+"searchHistory"
+) || "[]"
+);
+
+const box =
+document.getElementById(
+"historyList"
+);
+
+box.innerHTML = "";
+
+history.forEach(item=>{
+
+box.innerHTML += `
+<div style="
+padding:10px;
+margin-top:10px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+">
+🔎 ${item}
+</div>
+`;
+
+});
+
+}
   function toggleInfo() {
 
     const box =
