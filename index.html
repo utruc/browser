@@ -650,22 +650,149 @@ function search(){
         "searchCount",
         count
     );
-let history =
-JSON.parse(
-localStorage.getItem(
-"searchHistory"
-) || "[]"
-);
 
-history.unshift(q);
+    let history =
+    JSON.parse(
+    localStorage.getItem("searchHistory") || "[]"
+    );
 
-localStorage.setItem(
-"searchHistory",
-JSON.stringify(history)
-);
+    history.unshift(q);
+
+    localStorage.setItem(
+    "searchHistory",
+    JSON.stringify(history)
+    );
+
+    const domainPattern =
+    /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+
+    if(
+        q.startsWith("http://") ||
+        q.startsWith("https://")
+    ){
+        window.location.href = q;
+        return;
+    }
+
+    if(
+        q.startsWith("www.") ||
+        domainPattern.test(q)
+    ){
+        window.location.href =
+        "https://" + q;
+        return;
+    }
+
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
+
+}function search(){
+
+    const q =
+    document.getElementById("query").value.trim();
+
+    if(!q) return;
+
+    let count =
+    Number(localStorage.getItem("searchCount") || 0);
+
+    count++;
+
+    localStorage.setItem(
+        "searchCount",
+        count
+    );
+
+    let history =
+    JSON.parse(
+    localStorage.getItem("searchHistory") || "[]"
+    );
+
+    history.unshift(q);
+
+    localStorage.setItem(
+    "searchHistory",
+    JSON.stringify(history)
+    );
+
+    const domainPattern =
+    /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+
+    if(
+        q.startsWith("http://") ||
+        q.startsWith("https://")
+    ){
+        window.location.href = q;
+        return;
+    }
+
+    if(
+        q.startsWith("www.") ||
+        domainPattern.test(q)
+    ){
+        window.location.href =
+        "https://" + q;
+        return;
+    }
+
+    window.location.href =
+    "https://utruc.github.io/utrux-search/?q=" +
+    encodeURIComponent(q);
+
+}function search(){
+
+    const q =
+    document.getElementById("query").value.trim();
+
+    if(!q) return;
+
+    let count =
+    Number(localStorage.getItem("searchCount") || 0);
+
+    count++;
+
+    localStorage.setItem(
+        "searchCount",
+        count
+    );
+
+    let history =
+    JSON.parse(
+    localStorage.getItem("searchHistory") || "[]"
+    );
+
+    history.unshift(q);
+
+    localStorage.setItem(
+    "searchHistory",
+    JSON.stringify(history)
+    );
+
+    const domainPattern =
+    /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+
+    if(
+        q.startsWith("http://") ||
+        q.startsWith("https://")
+    ){
+        window.location.href = q;
+        return;
+    }
+
+    if(
+        q.startsWith("www.") ||
+        domainPattern.test(q)
+    ){
+        window.location.href =
+        "https://" + q;
+        return;
+    }
+
+    window.location.href =
+    "https://utruc.github.io/utrux-search/?q=" +
+    encodeURIComponent(q);
+
 }
 function updateClock(){
 
