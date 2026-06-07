@@ -635,14 +635,7 @@ function search(){
 
     const q =
     document.getElementById("query").value.trim();
-
-    if(!q) return;
-
-    let count =
-    Number(localStorage.getItem("searchCount") || 0);
-
-    count++;
-
+    
     localStorage.setItem(
        "searchCount",
        count
