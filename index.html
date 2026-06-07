@@ -385,6 +385,18 @@ h1{
 
     padding:12px;
 }
+    .letter-icon{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+}
     .extra-btn{
 
     width:100%;
@@ -626,6 +638,11 @@ h1{
             <span>Wiki</span>
         </a>
 
+<a class="card" href="javascript:void(0)" onclick="openHistory()">
+    <img src="https://images.jfif">
+    <span>تاریخچه</span>
+</a>
+    
 </div>
 
     <script>
@@ -647,6 +664,16 @@ function search(){
         count
     );
 
+let history =
+JSON.parse(localStorage.getItem("searchHistory") || "[]");
+
+history.unshift(q);
+
+localStorage.setItem(
+    "searchHistory",
+    JSON.stringify(history)
+);
+    
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
@@ -771,11 +798,101 @@ document.getElementById(
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
-</script>
+        //جدا
+        function openHistory(){
 
-<footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
-  ساخته شده توسط امیر مهدی حیدری &#10084;
-</footer>
+document.getElementById(
+"historyModal"
+).style.display = "flex";
+
+loadHistory();
+
+}
+
+function loadHistory(){
+
+const history =
+JSON.parse(
+localStorage.getItem(
+"searchHistory"
+) || "[]"
+);
+
+const box =
+document.getElementById(
+"historyList"
+);
+
+box.innerHTML = "";
+
+if(history.length===0){
+
+box.innerHTML =
+"<p>تاریخچه خالی است</p>";
+
+return;
+
+}
+
+history.forEach(item=>{
+
+box.innerHTML += `
+<div style="
+padding:10px;
+margin-bottom:10px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+">
+🔎 ${item}
+</div>
+`;
+
+});
+
+}
+
+function closeHistory(){
+
+document.getElementById(
+"historyModal"
+).style.display = "none";
+
+}
         
+function clearHistory(){
+
+if(confirm(
+"تاریخچه پاک شود؟"
+)){
+
+localStorage.removeItem(
+"searchHistory"
+);
+
+loadHistory();
+
+}
+
+}
+
+</script>
+<div id="historyModal" class="modal">
+<div class="modal-content">
+
+<h2>تاریخچه جستجو</h2>
+
+<div id="historyList"></div>
+
+<button class="save-btn" onclick="closeHistory()">
+⬅ بازگشت
+</button>
+
+<button class="save-btn" onclick="clearHistory()">
+🗑 پاک کردن تاریخچه
+</button>
+
+</div>
+</div>
+    
 </body>
 </html>
