@@ -737,27 +737,85 @@ function openAccount(){
     document.getElementById(
         "accountModal"
     ).style.display = "flex";
+const avatar =
+localStorage.getItem("avatar");
 
+if(avatar){
+
+document.getElementById(
+"avatarPreview"
+).src = avatar;
+
+document.getElementById(
+"avatarPreview"
+).style.display = "block";
+
+}
 }
 
 // ذخیره اطلاعات کاربر
-    function saveAccount() {
-    const name = document.getElementById("username").value.trim();
-    const email = document.getElementById("email").value.trim();
+function saveAccount(){
 
-    if (!name || !email) {
-        alert("لطفاً نام و ایمیل را وارد کنید");
-        return;
-    }
-        if(!localStorage.getItem("joinDate")){
+const name =
+document.getElementById("username").value.trim();
 
-    localStorage.setItem(
-        "joinDate",
-        new Date().toLocaleDateString("fa-IR")
-    );
+const email =
+document.getElementById("email").value.trim();
+
+const file =
+document.getElementById("avatar").files[0];
+
+if(!name || !email){
+
+alert("لطفاً نام و ایمیل را وارد کنید");
+
+return;
 
 }
-        document.getElementById("accountModal").style.display = "none";
+
+function finishSave(){
+
+localStorage.setItem(
+"utruxUser",
+JSON.stringify({
+name,
+email
+})
+);
+
+loadUser();
+
+document.getElementById(
+"accountModal"
+).style.display = "none";
+
+}
+
+if(file){
+
+const reader =
+new FileReader();
+
+reader.onload = ()=>{
+
+localStorage.setItem(
+"avatar",
+reader.result
+);
+
+finishSave();
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+finishSave();
+
+}
+
+}
 
     // ذخیره در LocalStorage
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
@@ -771,7 +829,20 @@ function openAccount(){
 
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
+const avatar =
+localStorage.getItem("avatar");
 
+if(avatar){
+
+document.getElementById(
+"avatarPreview"
+).src = avatar;
+
+document.getElementById(
+"avatarPreview"
+).style.display = "block";
+
+}
     const user =
     JSON.parse(localStorage.getItem("utruxUser"));
 
