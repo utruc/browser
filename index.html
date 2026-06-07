@@ -91,19 +91,12 @@ h1{
 }
 
 .search-box input{
-
     flex:1;
-
     background:none;
-
     border:none;
-
     outline:none;
-
     color:white;
-
     font-size:18px;
-
     padding:18px;
 }
 
@@ -739,13 +732,32 @@ function search(){
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
-
-}function search(){
+    }
+    function search(){
 
     const q =
     document.getElementById("query").value.trim();
 
     if(!q) return;
+
+    let url = q;
+
+    if(
+        q.startsWith("http://") ||
+        q.startsWith("https://")
+    ){
+        window.location.href = q;
+        return;
+    }
+
+    if(
+        q.includes(".") &&
+        !q.includes(" ")
+    ){
+        window.location.href =
+        "https://" + q;
+        return;
+    }
 
     let count =
     Number(localStorage.getItem("searchCount") || 0);
@@ -759,15 +771,21 @@ function search(){
 
     let history =
     JSON.parse(
-    localStorage.getItem("searchHistory") || "[]"
+        localStorage.getItem("searchHistory") || "[]"
     );
 
     history.unshift(q);
 
     localStorage.setItem(
-    "searchHistory",
-    JSON.stringify(history)
+        "searchHistory",
+        JSON.stringify(history)
     );
+
+    window.location.href =
+    "https://utruc.github.io/utrux-search/?q=" +
+    encodeURIComponent(q);
+
+}
 
     const domainPattern =
     /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
