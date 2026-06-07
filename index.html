@@ -445,6 +445,8 @@ h1{
 
     <h1>Utrux Browser</h1>
 <div id="clock"></div>
+<p id="joinDateText"></p>
+<p id="searchCountText"></p>
 <div class="search-box">
 
     <input
@@ -490,7 +492,15 @@ function search(){
     document.getElementById("query").value.trim();
 
     if(!q) return;
+let count =
+Number(localStorage.getItem("searchCount") || 0);
 
+count++;
+
+localStorage.setItem(
+   "searchCount",
+   count
+);
 window.location.href =
 "https://utruc.github.io/utrux-search/?q=" +
 encodeURIComponent(q);
@@ -551,7 +561,7 @@ function openAccount() {
 }
 
 // ذخیره اطلاعات کاربر
-function saveAccount() {
+    function saveAccount() {
     const name = document.getElementById("username").value.trim();
     const email = document.getElementById("email").value.trim();
 
@@ -559,6 +569,14 @@ function saveAccount() {
         alert("لطفاً نام و ایمیل را وارد کنید");
         return;
     }
+        if(!localStorage.getItem("joinDate")){
+
+    localStorage.setItem(
+        "joinDate",
+        new Date().toLocaleDateString("fa-IR")
+    );
+
+}
 
     // ذخیره در LocalStorage
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
@@ -572,14 +590,29 @@ function saveAccount() {
 
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
-    const user = JSON.parse(localStorage.getItem("utruxUser"));
-    if (user && user.name) {
-        document.getElementById("account").innerHTML = `👤 ${user.name}`;
-    } else {
-        document.getElementById("account").innerHTML = "👤 کاربر مهمان";
-    }
-}
 
+    const user =
+    JSON.parse(localStorage.getItem("utruxUser"));
+
+    if(user){
+
+        document.getElementById("account").innerHTML =
+        "👤 " + user.name;
+
+    }
+
+    const joinDate =
+    localStorage.getItem("joinDate") || "ثبت نشده";
+
+    const searchCount =
+    localStorage.getItem("searchCount") || 0;
+
+    document.getElementById("joinDateText").innerHTML =
+    "📅 تاریخ عضویت: " + joinDate;
+
+    document.getElementById("searchCountText").innerHTML =
+    "🔎 تعداد جستجوها: " + searchCount;
+}
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
