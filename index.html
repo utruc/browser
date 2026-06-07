@@ -219,17 +219,6 @@ h1{
 
     margin-top:10px;
 }
-.letter-icon{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(20px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-}
     .suggestion{
 
     padding:12px 18px;
@@ -693,43 +682,7 @@ h1{
         <a class="card" href="https://wikipedia.org">
             <img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=64">
             <span>Wiki</span>
-        </a>
-<div class="shortcuts-buttons">
-<div class="shortcuts" id="extraShortcuts">
-  <a class="card" href="javascript:void(0)" onclick="togglePanel('downloadPanel')">
-    <div class="letter-icon">📥</div>
-    <span>دانلود منیجر</span>
-  </a>
-  <a class="card" href="javascript:void(0)" onclick="togglePanel('calcPanel')">
-    <div class="letter-icon">🧮</div>
-    <span>ماشین حساب</span>
-  </a>
-  <a class="card" href="javascript:void(0)" onclick="togglePanel('translatorPanel')">
-    <div class="letter-icon">🌐</div>
-    <span>مترجم</span>
-  </a>
-</div>
 
-<div class="panel" id="downloadPanel" style="display:none;">
-  <h3>دانلود منیجر</h3>
-  <input type="text" id="downloadURL" placeholder="لینک فایل">
-  <button onclick="downloadFile()">دانلود</button>
-  <div id="downloadList"></div>
-</div>
-
-<div class="panel" id="calcPanel" style="display:none;">
-  <h3>ماشین حساب</h3>
-  <input type="text" id="calcInput" placeholder="مثال: 5+3*2">
-  <button onclick="calculate()">محاسبه</button>
-  <div id="calcResult"></div>
-</div>
-
-<div class="panel" id="translatorPanel" style="display:none;">
-  <h3>مترجم</h3>
-  <textarea id="translateInput" placeholder="متن خود را وارد کنید"></textarea>
-  <button onclick="translateText()">ترجمه</button>
-  <div id="translateResult"></div>
-</div>
 </div>
 
     <script>
@@ -895,55 +848,6 @@ document.getElementById(
 
     document.getElementById("searchCountText").innerHTML =
     "🔎 تعداد جستجوهای شما : " + searchCount;
-}
-// اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
-window.addEventListener("DOMContentLoaded", loadUser);
-
-// دانلود منیجر
-let downloads = [];
-function downloadFile(){
-  const url = document.getElementById("downloadURL").value.trim();
-  if(!url) return;
-  const fileName = url.split("/").pop();
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = fileName || "file";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  downloads.push(fileName);
-  updateDownloadList();
-  document.getElementById("downloadURL").value = "";
-}
-function updateDownloadList(){
-  const list = document.getElementById("downloadList");
-  list.innerHTML = "";
-  downloads.forEach(f=>{
-    const div = document.createElement("div");
-    div.className = "download-item";
-    div.textContent = f;
-    list.appendChild(div);
-  });
-}
-
-// ماشین حساب
-function calculate(){
-  const input = document.getElementById("calcInput").value.trim();
-  if(!input) return;
-  try{
-    const result = eval(input);
-    document.getElementById("calcResult").textContent = "نتیجه: " + result;
-  }catch(e){
-    document.getElementById("calcResult").textContent = "ورودی نامعتبر";
-  }
-}
-
-// مترجم (نمونه ساده)
-function translateText(){
-  const text = document.getElementById("translateInput").value.trim();
-  if(!text) return;
-  const translated = text.split("").reverse().join(""); // فقط جهت تست
-  document.getElementById("translateResult").textContent = translated;
 }
         
 </script>
