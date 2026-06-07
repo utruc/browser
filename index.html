@@ -580,6 +580,35 @@ h1{
 
     display:none;
 }
+    #extraShortcuts .card{
+    width:72px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    cursor:pointer;
+}
+#extraShortcuts .letter-icon{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+    transition:.25s;
+}
+#extraShortcuts .card:hover .letter-icon{
+    transform:translateY(-5px);
+}
+#extraShortcuts span{
+    font-size:12px;
+    text-align:center;
+    margin-top:4px;
+}
 </style>
 
 <body>
@@ -687,7 +716,6 @@ h1{
   </a>
 </div>
 
-<!-- محتویات پنل‌ها -->
 <div class="panel" id="downloadPanel" style="display:none;">
   <h3>دانلود منیجر</h3>
   <input type="text" id="downloadURL" placeholder="لینک فایل">
@@ -741,7 +769,7 @@ function updateClock(){
     now.toLocaleTimeString("fa-IR");
 
 }
-        function togglePanel(id){
+function togglePanel(id){
   const panel = document.getElementById(id);
   if(panel.style.display === "none" || panel.style.display === ""){
     panel.style.display = "block";
