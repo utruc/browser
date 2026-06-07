@@ -574,9 +574,9 @@ h1{
             💾 ذخیره
         </button>
 
-        <button class="extra-btn" onclick="toggleInfo()">
-            ℹ️ اطلاعات اضافی
-        </button>
+<button class="extra-btn" onclick="toggleInfo()">
+    ℹ️ اطلاعات اضافی
+</button>
 
         <div id="extraInfo" style="display:none">
 
@@ -664,23 +664,22 @@ function updateClock(){
     now.toLocaleTimeString("fa-IR");
 
 }
-        function toggleInfo(){
+  function toggleInfo() {
 
     const box =
     document.getElementById("extraInfo");
 
-    if(box.style.display === "none"){
+    if (box.style.display === "none" || box.style.display === "") {
 
         box.style.display = "block";
 
-    }else{
+    } else {
 
         box.style.display = "none";
 
     }
 
 }
-
         if(!localStorage.getItem("joinDate")){
 
    localStorage.setItem(
@@ -742,6 +741,7 @@ function openAccount() {
     );
 
 }
+        document.getElementById("accountModal").style.display = "none";
 
     // ذخیره در LocalStorage
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
