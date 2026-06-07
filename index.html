@@ -713,8 +713,24 @@ function openAccount(){
         "accountModal"
     ).style.display = "flex";
 
-}
+    const user =
+    JSON.parse(
+        localStorage.getItem("utruxUser")
+    );
 
+    if(user){
+
+        document.getElementById(
+            "username"
+        ).value = user.name || "";
+
+        document.getElementById(
+            "email"
+        ).value = user.email || "";
+
+    }
+
+}
 // ذخیره اطلاعات کاربر
     function saveAccount() {
     const name = document.getElementById("username").value.trim();
