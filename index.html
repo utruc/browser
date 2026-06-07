@@ -626,6 +626,16 @@ h1{
             <span>Wiki</span>
         </a>
 
+    <a class="card"
+href="javascript:void(0)"
+onclick="openHistory()">
+
+<div class="image">images.jfif</div>
+
+<span>تاریخچه</span>
+
+</a>
+
 </div>
 
     <script>
@@ -646,7 +656,19 @@ function search(){
         "searchCount",
         count
     );
+let history =
+JSON.parse(
+localStorage.getItem(
+"searchHistory"
+) || "[]"
+);
 
+history.unshift(q);
+
+localStorage.setItem(
+"searchHistory",
+JSON.stringify(history)
+);
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
