@@ -482,9 +482,9 @@ function search(){
 
     if(!q) return;
 
-    window.location.href =
-    "https://utruc.github.io/utrux-search/?q="
-    + encodeURIComponent(q);
+window.location.href =
+"https://utruc.github.io/utrux-search/?q=" +
+encodeURIComponent(q);
 
 }
 
@@ -516,22 +516,21 @@ localStorage.setItem(
    count
 );
 
-        const file =
+const file =
 document.getElementById("avatar").files[0];
 
-const reader =
-new FileReader();
+if(file){
+   const reader = new FileReader();
 
-reader.onload = () => {
+   reader.onload = () => {
+      localStorage.setItem(
+         "avatar",
+         reader.result
+      );
+   };
 
-   localStorage.setItem(
-      "avatar",
-      reader.result
-   );
-
-};
-
-reader.readAsDataURL(file);
+   reader.readAsDataURL(file);
+}
 
 setInterval(updateClock,1000);
 
