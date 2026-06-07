@@ -595,41 +595,15 @@ onclick="closeShortcutManager()">
 </div>
 <div id="accountModal" class="modal">
 
-    <div style="text-align:center;">
-
-<img id="profileImage"
-style="
-width:90px;
-height:90px;
-border-radius:50%;
-object-fit:cover;
-margin-bottom:15px;
-">
-
-<div id="profileName"></div>
-
-<div id="profileEmail"></div>
-
-<div id="joinDateText"></div>
-
-<div id="searchCountText"></div>
-
-<button
-class="save-btn"
-onclick="openEditAccount()">
-
-✏️ ویرایش حساب
-
-</button>
-
-</div>
-
-    
-
     <div class="modal-content">
 
-     
-</div>
+        <h2>ساخت حساب</h2>
+
+        <input type="file" id="avatar">
+
+        <input id="username" placeholder="نام">
+
+        <input id="email" placeholder="ایمیل">
 
         <button class="save-btn" onclick="saveAccount()">
             💾 ذخیره
@@ -1068,6 +1042,23 @@ updateClock();
 // باز کردن پنل حساب
 function openAccount(){
 
+const user =
+JSON.parse(
+localStorage.getItem("utruxUser")
+);
+
+if(user){
+
+document.getElementById(
+"username"
+).value = user.name || "";
+
+document.getElementById(
+"email"
+).value = user.email || "";
+
+}
+
 document.getElementById(
 "accountModal"
 ).style.display = "flex";
@@ -1131,35 +1122,17 @@ loadUser();
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
 
-const user =
-JSON.parse(
-localStorage.getItem("utruxUser")
-);
+    const user =
+    JSON.parse(localStorage.getItem("utruxUser"));
 
-if(user){
+    if(user){
 
 document.getElementById(
-"profileName"
-).innerHTML =
-"👤 نام: " + user.name;
+    "accountName"
+).textContent = user.name;
 
-document.getElementById(
-"profileEmail"
-).innerHTML =
-"📧 ایمیل: " + user.email;
-
-}
-
-const avatar =
-localStorage.getItem("avatar");
-
-if(avatar){
-
-document.getElementById(
-"profileImage"
-).src = avatar;
-
-}
+    }
+        
     const joinDate =
     localStorage.getItem("joinDate") || "ثبت نشده";
 
@@ -1485,14 +1458,6 @@ loadCustomShortcuts();
 loadShortcutManager();
 
 }     
-
-function openEditAccount(){
-
-document.getElementById(
-"editAccountModal"
-).style.display = "flex";
-
-}
         
 </script>
 
