@@ -554,13 +554,13 @@ h1{
     <span id="accountName">کاربر مهمان</span>
 
 </div>
+<div id="accountModal" class="modal">
+
+    <div class="modal-content">
 
         <h2>ساخت حساب</h2>
 
-<input type="file" id="avatar">
-        
-
-    <div class="modal-content">
+        <input type="file" id="avatar">
 
         <input id="username" placeholder="نام">
 
@@ -570,9 +570,9 @@ h1{
             💾 ذخیره
         </button>
 
-<button class="extra-btn" onclick="toggleInfo()">
-    ℹ️ اطلاعات اضافی
-</button>
+        <button class="extra-btn" onclick="toggleInfo()">
+            ℹ️ اطلاعات اضافی
+        </button>
 
         <div id="extraInfo" style="display:none">
 
@@ -584,8 +584,7 @@ h1{
 
     </div>
 
-</div>
-    
+</div>    
 <div class="container">
 
     <img src="c7896133-3991-4070-a5bb-7db2cc9d612a.png" class="logo">
@@ -635,16 +634,22 @@ function search(){
 
     const q =
     document.getElementById("query").value.trim();
-    
+
+    if(!q) return;
+
+    let count =
+    Number(localStorage.getItem("searchCount") || 0);
+
+    count++;
+
     localStorage.setItem(
-       "searchCount",
-       count
+        "searchCount",
+        count
     );
 
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
-
 }
 function updateClock(){
 
@@ -678,16 +683,6 @@ function updateClock(){
    );
 
 }
-
-        let count =
-Number(localStorage.getItem("searchCount") || 0);
-
-count++;
-
-localStorage.setItem(
-   "searchCount",
-   count
-);
 
 const file =
 document.getElementById("avatar").files[0];
