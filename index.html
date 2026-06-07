@@ -558,32 +558,33 @@ h1{
 
 <input type="file" id="avatar">
         
-        <input
-        id="username"
-        placeholder="نام">
+      <div id="accountModal" class="modal">
 
-        <input
-        id="email"
-        placeholder="ایمیل">
+    <div class="modal-content">
 
-<button class="save-btn" onclick="saveAccount()">
-💾 ذخیره
-</button>
-    <button class="extra-btn" onclick="toggleInfo()">
-    ℹ️ اطلاعات اضافی
-</button>
+        <h2>ساخت حساب</h2>
 
-<div id="extraInfo" style="display:none;">
+        <input type="file" id="avatar">
 
-    <div id="joinDateText"></div>
+        <input id="username" placeholder="نام">
 
-    <div id="searchCountText"></div>
+        <input id="email" placeholder="ایمیل">
 
-</div>
-
-
-</div>
+        <button class="save-btn" onclick="saveAccount()">
+            💾 ذخیره
         </button>
+
+        <button class="extra-btn" onclick="toggleInfo()">
+            ℹ️ اطلاعات اضافی
+        </button>
+
+        <div id="extraInfo" style="display:none">
+
+            <div id="joinDateText"></div>
+
+            <div id="searchCountText"></div>
+
+        </div>
 
     </div>
 
