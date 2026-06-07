@@ -385,18 +385,6 @@ h1{
 
     padding:12px;
 }
-    .letter-icon{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:24px;
-}
     .extra-btn{
 
     width:100%;
@@ -638,12 +626,6 @@ h1{
             <span>Wiki</span>
         </a>
 
-<a class="card" href="javascript:void(0)" onclick="openHistory()">
-    <img src="https://images.jfif">
-    <span>تاریخچه</span>
-
-</a>
-    
 </div>
 
     <script>
@@ -665,16 +647,6 @@ function search(){
         count
     );
 
-let history =
-JSON.parse(localStorage.getItem("searchHistory") || "[]");
-
-history.unshift(q);
-
-localStorage.setItem(
-    "searchHistory",
-    JSON.stringify(history)
-);
-    
     window.location.href =
     "https://utruc.github.io/utrux-search/?q=" +
     encodeURIComponent(q);
@@ -738,91 +710,66 @@ function openAccount(){
     document.getElementById(
         "accountModal"
     ).style.display = "flex";
-const avatar =
+
+}
+        const avatar =
 localStorage.getItem("avatar");
 
 if(avatar){
 
-document.getElementById(
-"avatarPreview"
-).src = avatar;
+    avatarPreview.src = avatar;
+    avatarPreview.style.display = "block";
 
-document.getElementById(
-"avatarPreview"
-).style.display = "block";
-
-}
 }
 
 // ذخیره اطلاعات کاربر
-function saveAccount(){
+    function saveAccount() {
+    const name = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-const name =
-document.getElementById("username").value.trim();
+    if (!name || !email) {
+        alert("لطفاً نام و ایمیل را وارد کنید");
+        return;
+    }
+        if(!localStorage.getItem("joinDate")){
 
-const email =
-document.getElementById("email").value.trim();
-
-const file =
-document.getElementById("avatar").files[0];
-
-if(!name || !email){
-
-alert("لطفاً نام و ایمیل را وارد کنید");
-
-return;
+    localStorage.setItem(
+        "joinDate",
+        new Date().toLocaleDateString("fa-IR")
+    );
 
 }
-
-function finishSave(){
-
-localStorage.setItem(
-"utruxUser",
-JSON.stringify({
-name,
-email
-})
-);
-
-loadUser();
-
-document.getElementById(
-"accountModal"
-).style.display = "none";
-
-}
-
-if(file){
-
-const reader =
-new FileReader();
-
-reader.onload = ()=>{
-
-localStorage.setItem(
-"avatar",
-reader.result
-);
-
-finishSave();
-
-};
-
-reader.readAsDataURL(file);
-
-}else{
-
-finishSave();
-
-}
-
-}
+        document.getElementById("accountModal").style.display = "none";
 
     // ذخیره در LocalStorage
     localStorage.setItem("utruxUser", JSON.stringify({ name, email }));
 
     // بارگذاری اطلاعات برای نمایش در صفحه
+    const file = document.getElementById("avatar").files[0];
+
+if(file){
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+
+        localStorage.setItem(
+            "avatar",
+            reader.result
+        );
+
+        loadUser();
+
+    };
+
+    reader.readAsDataURL(file);
+
+}else{
+
     loadUser();
+
+}
+        loadUser();
 
     // بستن پنل حساب
     document.getElementById("accountModal").style.display = "none";
@@ -830,20 +777,7 @@ finishSave();
 
 // بارگذاری اطلاعات کاربر هنگام لود صفحه
 function loadUser() {
-const avatar =
-localStorage.getItem("avatar");
 
-if(avatar){
-
-document.getElementById(
-"avatarPreview"
-).src = avatar;
-
-document.getElementById(
-"avatarPreview"
-).style.display = "block";
-
-}
     const user =
     JSON.parse(localStorage.getItem("utruxUser"));
 
@@ -867,104 +801,20 @@ document.getElementById(
     document.getElementById("searchCountText").innerHTML =
     "🔎 تعداد جستجوهای شما : " + searchCount;
 }
+        const avatar = localStorage.getItem("avatar");
+
+if(avatar){
+    avatarPreview.src = avatar;
+    avatarPreview.style.display = "block";
+}
 // اطمینان از بارگذاری اطلاعات هنگام شروع صفحه
 window.addEventListener("DOMContentLoaded", loadUser);
 
-        //جدا
-        function openHistory(){
-
-document.getElementById(
-"historyModal"
-).style.display = "flex";
-
-loadHistory();
-
-}
-
-function loadHistory(){
-
-const history =
-JSON.parse(
-localStorage.getItem(
-"searchHistory"
-) || "[]"
-);
-
-const box =
-document.getElementById(
-"historyList"
-);
-
-box.innerHTML = "";
-
-if(history.length===0){
-
-box.innerHTML =
-"<p>تاریخچه خالی است</p>";
-
-return;
-
-}
-
-history.forEach(item=>{
-
-box.innerHTML += `
-<div style="
-padding:10px;
-margin-bottom:10px;
-background:rgba(255,255,255,.08);
-border-radius:12px;
-">
-🔎 ${item}
-</div>
-`;
-
-});
-
-}
-
-function closeHistory(){
-
-document.getElementById(
-"historyModal"
-).style.display = "none";
-
-}
-        
-function clearHistory(){
-
-if(confirm(
-"تاریخچه پاک شود؟"
-)){
-
-localStorage.removeItem(
-"searchHistory"
-);
-
-loadHistory();
-
-}
-
-}
-
 </script>
-<div id="historyModal" class="modal">
-<div class="modal-content">
 
-<button class="save-btn" onclick="closeHistory()">
-⬅ بازگشت
-</button>
-    
-<h2>تاریخچه جستجو</h2>
-
-<div id="historyList"></div>
-
-<button class="save-btn" onclick="clearHistory()">
-🗑 پاک کردن تاریخچه
-</button>
-
-</div>
-</div>
-    
+<footer style="text-align:center; padding:15px; color:#a8b3cf; font-size:14px;">
+  ساخته شده توسط امیر مهدی حیدری &#10084;
+</footer>
+        
 </body>
 </html>
